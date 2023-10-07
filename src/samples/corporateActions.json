@@ -1,0 +1,31 @@
+{
+  "dividend": [
+    {
+      "purpose_name": "Final Dividend",
+      "BCRD_from": "02 Jun 2023",
+      "Amount": 17.5
+    }
+  ],
+  "bonus": [
+    {
+      "XTYPE": "Bonus",
+      "BCRD_FROM": "04 Sep 2018",
+      "VALUE": "issue 1:1"
+    }
+  ],
+  "recent_actions": [
+    {
+      "DR": 1,
+      "scrip_code": 500209,
+      "sLongName": "INFOSYS LTD.",
+      "BCRD": "RD 02/06/2023",
+      "purpose_code": "DP ",
+      "short_name": "INFY",
+      "Ex_date": "02 Jun 2023",
+      "purpose": "Final Dividend",
+      "Details": "17.5000",
+      "PAYMENT_DATE": "2023-07-03T00:00:00"
+    }
+  ]
+}
+
