@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bse"
+version = "0.0.4"
+authors = [
+  { name="Benny Thadikaran" },
+]
+description = "Unofficial Python Api for BSE India stock exchange"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+keywords = ["bse", "bse-stock-data", "stock-market-api", "stock-news-api"]
+dependencies = ["requests==2.31.0"]
+
+[project.urls]
+"Homepage" = "https://github.com/BennyThadikaran/BseIndiaApi"
+"Bug Tracker" = "https://github.com/BennyThadikaran/BseIndiaApi/issues"

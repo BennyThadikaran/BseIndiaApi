@@ -1,4 +1,4 @@
-from BSE import BSE
+from bse import BSE
 from datetime import datetime, timedelta
 from sys import argv
 
@@ -9,7 +9,7 @@ if len(argv) == 1:
 sym = argv[1]
 toDate = datetime.today()
 daysBack = 10
-count = int(argv[2]) if len(argv) == 2 else None
+count = int(argv[2]) if len(argv) == 3 else None
 
 attach_url = 'https://www.bseindia.com/xml-data/corpfiling/AttachLive'
 

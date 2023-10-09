@@ -1,4 +1,4 @@
-from BSE import BSE
+from bse import BSE
 from sys import argv
 from datetime import datetime
 

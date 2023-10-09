@@ -1,6 +1,6 @@
 from requests import Session
 from requests.exceptions import ReadTimeout
-from Throttle import Throttle
+from .Throttle import Throttle
 from re import search
 
 throttle_config = {
@@ -85,7 +85,7 @@ class BSE:
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self.session.close()
         if exc_type:
-            print(f'{exc_type}: {exc_value} | {exc_traceback}')
+            exit(f'{exc_type}: {exc_value} | {exc_traceback}')
         return True
 
     def exit(self):

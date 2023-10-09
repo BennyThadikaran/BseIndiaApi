@@ -1,4 +1,4 @@
-from BSE import BSE
+from bse import BSE
 from os import system
 from sys import platform
 

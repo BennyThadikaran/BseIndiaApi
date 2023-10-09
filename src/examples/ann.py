@@ -1,4 +1,4 @@
-from BSE import BSE
+from bse import BSE
 from datetime import datetime
 from re import findall
 from os import system

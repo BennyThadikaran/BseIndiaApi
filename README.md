@@ -1,15 +1,22 @@
 # BseIndiaApi
+
 An unofficial python api for BSE India stock exchange.
 
-## Installation
 Python version: >= 3.6
 
-Download or clone the repo and install the dependencies: `pip install requests`
+## Install with PIP
+
+```
+pip install bse
+```
 
 ## Usage
 
 Using with statement
+
 ```python
+from bse import BSE
+
 with BSE() as bse:
     code = bse.getScripCode('tcs') # 532540 bse scrip code
 
@@ -19,8 +26,12 @@ with BSE() as bse:
 
     bse.quote(scrip_code) # Open, High, Low, LTP
 ```
+
 or
+
 ```python
+from bse import BSE
+
 bse = BSE()
 
 code = bse.getScripCode('tcs') # 532540 bse scrip code
@@ -31,6 +42,7 @@ bse.exit() # close the request session
 ```
 
 ## Sample Responses
+
 `src/samples` contain the sample responses from the various methods in JSON format.
 
 The files are named after the corresponding method in `src/BSE.py`. Use it to understand the API response structure.
@@ -42,49 +54,50 @@ Help on class BSE in module BSE:
 
 class BSE(builtins.object)
  |  Unofficial api for BSE India
- |  
+ |
  |  Methods defined here:
- |  
+ |
  |  __init__(self)
  |      Initialize self.  See help(type(self)) for accurate signature.
- |  
+ |
  |  advanceDecline(self)
  |      returns list of dictionary of advance decline values for each index
- |  
+ |
  |  allAnnouncements(self, fromDate, toDate, category='-1')
  |      Returns all news items by date
- |  
+ |
  |  allCorporateActions(self)
  |      returns list of dictionary of all corporate actions
- |  
+ |
  |  announcements(self, scripcode, fromDate, toDate)
  |      Return Corporate announcements by scripcode and date
- |  
+ |
  |  corporateActions(self, scripcode)
  |      Returns Corporate Actions by scripcode
  |
  |  exit(self)
- |  
+ |
  |  getScripCode(self, scripname)
  |      returns bse symbol code for stock symbol name
- |  
+ |
  |  getScripName(self, scripcode)
  |      returns stock symbol name for bse scrip code
- |  
+ |
  |  listSecurities(self, industry='', scripcode='', group='', segment='Equity', status='Active')
  |      List all securities with their meta info or filter by industry etc.
- |  
+ |
  |  near52WeekHighLow(self, scripcode='', indexcode='', group='')
  |      Returns stocks near 52 week highs and lows
- |  
+ |
  |  quote(self, scripcode)
  |      Get OHLC quotes for given scripcode
- |  
+ |
  |  scripMeta(self, scripcode='', segment='Equity', status='Active', group='', industry='')
  |      Return scrip meta info for all stocks or filtered by industry etc
 ```
 
 ## CONSTANTS
+
 ```python
 # Corporate Announcement categories
 CATEGORY_AGM = 'AGM/EGM'
@@ -134,15 +147,18 @@ INDUSTRY_UTILITIES = 'Utilities'
 ```
 
 ## Example Folder
+
 `src/examples` contains scripts that use the `BSE.py`. These are script i wrote some years back. All scripts incorporate color and fancy formatting to look good. 😄
 
+To use the scripts download or clone the repo.
+
 - **ann.py**: This is the only script i still use to date. It display all corporate announcements and corporate actions relating to your watchlist or portfolio.
-    - To get started, store your watchlist symbols in a text file each symbol on a new line.
-    - At first, execute `ann.py` passing the text file as an argument. `py ann.py watchlist.txt`. This will generate a `watchlist.json` file and print out all announcements and actions related to your watchlist.
-    - Next time, simply execute `py ann.py` to see announcements for the day.
+  - To get started, store your watchlist symbols in a text file each symbol on a new line.
+  - At first, execute `ann.py` passing the text file as an argument. `py ann.py watchlist.txt`. This will generate a `watchlist.json` file and print out all announcements and actions related to your watchlist.
+  - Next time, simply execute `py ann.py` to see announcements for the day.
 - **news.py**: `news.py` simply prints the last 10 announcements for a scrip.
-    - Execute it as `py news.py infy`.
-    - You can optionally limit the results by passing a number after the symbol.
-    - `py news.py infy 3`. This returns the last 3 announcements.
+  - Execute it as `py news.py infy`.
+  - You can optionally limit the results by passing a number after the symbol.
+  - `py news.py infy 3`. This returns the last 3 announcements.
 - **actions.py**: `py actions.py infy` to print the recent corporate actions. Nothing more.
-- **advances.py**: `py advances.py` to print the advance decline ratios for various bse Indexes. 
+- **advances.py**: `py advances.py` to print the advance decline ratios for various bse Indexes.
