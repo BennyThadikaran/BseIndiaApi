@@ -80,7 +80,7 @@ class Fmt:
 
     @staticmethod
     def annHeading(sym, category):
-        return f"{Fmt.CYAN}{Fmt.BOLD}{sym} - {category}\n"
+        return f"{Fmt.CYAN}{Fmt.BOLD}{sym.upper()} - {category}\n"
 
     @staticmethod
     def annSubject(subject, headline):
@@ -116,7 +116,7 @@ else:
 
 
 with BSE() as bse:
-    if not symList is None:
+    if symList:
         for sym in symList:
             code = bse.getScripCode(sym)
             watchlist[code] = sym
@@ -130,7 +130,7 @@ with BSE() as bse:
 text = ''
 
 for ann in annList:
-    code = ann['SCRIP_CD']
+    code = str(ann['SCRIP_CD'])
 
     if not (code in watchlist and ann['CATEGORYNAME']):
         continue
