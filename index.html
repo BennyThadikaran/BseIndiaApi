@@ -1,0 +1,646 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Usage" href="usage.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>bse 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">bse 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">bse 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Constants.html">Constants</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="welcome-to-bse-s-documentation">
+<h1>Welcome to BSE’s documentation!<a class="headerlink" href="#welcome-to-bse-s-documentation" title="Link to this heading">#</a></h1>
+<p><strong>BSE</strong> is an Unofficial Python Api for BSE India stock exchange</p>
+<p>Python version: &gt;= 3.10</p>
+<p>All network requests through BSE are rate limited or throttled. This allows making large number of requests without overloading the server or getting blocked.</p>
+<p>GitHub Source: <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi">BennyThadikaran/BseIndiaApi</a></p>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#general-methods">General Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.exit"><code class="docutils literal notranslate"><span class="pre">BSE.exit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.getScripName"><code class="docutils literal notranslate"><span class="pre">BSE.getScripName()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.getScripCode"><code class="docutils literal notranslate"><span class="pre">BSE.getScripCode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#download-reports">Download Reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.bhavcopyReport"><code class="docutils literal notranslate"><span class="pre">BSE.bhavcopyReport()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.deliveryReport"><code class="docutils literal notranslate"><span class="pre">BSE.deliveryReport()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#corporate-filings">Corporate Filings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.announcements"><code class="docutils literal notranslate"><span class="pre">BSE.announcements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.actions"><code class="docutils literal notranslate"><span class="pre">BSE.actions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.resultCalendar"><code class="docutils literal notranslate"><span class="pre">BSE.resultCalendar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#market-updates-and-summary">Market Updates and Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.gainers"><code class="docutils literal notranslate"><span class="pre">BSE.gainers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.losers"><code class="docutils literal notranslate"><span class="pre">BSE.losers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.near52WeekHighLow"><code class="docutils literal notranslate"><span class="pre">BSE.near52WeekHighLow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.quote"><code class="docutils literal notranslate"><span class="pre">BSE.quote()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.quoteWeeklyHL"><code class="docutils literal notranslate"><span class="pre">BSE.quoteWeeklyHL()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#bse.BSE.listSecurities"><code class="docutils literal notranslate"><span class="pre">BSE.listSecurities()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Constants.html">Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY"><code class="docutils literal notranslate"><span class="pre">CATEGORY</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.ACTION"><code class="docutils literal notranslate"><span class="pre">CATEGORY.ACTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.AGM"><code class="docutils literal notranslate"><span class="pre">CATEGORY.AGM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.BOARD_MEETING"><code class="docutils literal notranslate"><span class="pre">CATEGORY.BOARD_MEETING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.INSIDER"><code class="docutils literal notranslate"><span class="pre">CATEGORY.INSIDER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.NEW_LISTING"><code class="docutils literal notranslate"><span class="pre">CATEGORY.NEW_LISTING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.OTHERS"><code class="docutils literal notranslate"><span class="pre">CATEGORY.OTHERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.RESULT"><code class="docutils literal notranslate"><span class="pre">CATEGORY.RESULT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.CATEGORY.UPDATE"><code class="docutils literal notranslate"><span class="pre">CATEGORY.UPDATE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT"><code class="docutils literal notranslate"><span class="pre">SEGMENT</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.COMMERCIAL_PAPERS"><code class="docutils literal notranslate"><span class="pre">SEGMENT.COMMERCIAL_PAPERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.DEBENTURES_BONDS"><code class="docutils literal notranslate"><span class="pre">SEGMENT.DEBENTURES_BONDS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.EQUITY"><code class="docutils literal notranslate"><span class="pre">SEGMENT.EQUITY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.EQUITY_INSTITUTIONAL"><code class="docutils literal notranslate"><span class="pre">SEGMENT.EQUITY_INSTITUTIONAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.MF"><code class="docutils literal notranslate"><span class="pre">SEGMENT.MF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SEGMENT.PREFERENCE_SHARES"><code class="docutils literal notranslate"><span class="pre">SEGMENT.PREFERENCE_SHARES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.STATUS"><code class="docutils literal notranslate"><span class="pre">STATUS</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.STATUS.ACTIVE"><code class="docutils literal notranslate"><span class="pre">STATUS.ACTIVE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.STATUS.DELISTED"><code class="docutils literal notranslate"><span class="pre">STATUS.DELISTED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.STATUS.SUSPENDED"><code class="docutils literal notranslate"><span class="pre">STATUS.SUSPENDED</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.INDEX"><code class="docutils literal notranslate"><span class="pre">INDEX</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.ALLCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.ALLCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.AUTO"><code class="docutils literal notranslate"><span class="pre">INDEX.AUTO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BANKEX"><code class="docutils literal notranslate"><span class="pre">INDEX.BANKEX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BHARAT_22"><code class="docutils literal notranslate"><span class="pre">INDEX.BHARAT_22</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE100"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE100</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE100_ESG"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE100_ESG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE100_LARGECAP_TMC"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE100_LARGECAP_TMC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE150_MIDCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE150_MIDCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE200"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE200</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE250_LARGEMIDCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE250_LARGEMIDCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE250_SMALLCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE250_SMALLCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE400_MIDSMALLCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE400_MIDSMALLCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.BSE500"><code class="docutils literal notranslate"><span class="pre">INDEX.BSE500</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.CAPITAL_GOODS"><code class="docutils literal notranslate"><span class="pre">INDEX.CAPITAL_GOODS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.CARBONEX"><code class="docutils literal notranslate"><span class="pre">INDEX.CARBONEX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.COMMODITIES"><code class="docutils literal notranslate"><span class="pre">INDEX.COMMODITIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.CONSUMER_DISCRETIONARY"><code class="docutils literal notranslate"><span class="pre">INDEX.CONSUMER_DISCRETIONARY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.CONSUMER_DURABLES"><code class="docutils literal notranslate"><span class="pre">INDEX.CONSUMER_DURABLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.CPSE"><code class="docutils literal notranslate"><span class="pre">INDEX.CPSE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.DIVERSIFIED_FINANCIALS_REVENUE_GROWTH"><code class="docutils literal notranslate"><span class="pre">INDEX.DIVERSIFIED_FINANCIALS_REVENUE_GROWTH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.DIVIDEND_STABILITY"><code class="docutils literal notranslate"><span class="pre">INDEX.DIVIDEND_STABILITY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.DOLLEX_100"><code class="docutils literal notranslate"><span class="pre">INDEX.DOLLEX_100</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.DOLLEX_200"><code class="docutils literal notranslate"><span class="pre">INDEX.DOLLEX_200</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.DOLLEX_30"><code class="docutils literal notranslate"><span class="pre">INDEX.DOLLEX_30</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.ENERGY"><code class="docutils literal notranslate"><span class="pre">INDEX.ENERGY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.ENHANCED_VALUE"><code class="docutils literal notranslate"><span class="pre">INDEX.ENHANCED_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.FAST_MOVING_CONSUMER_GOODS"><code class="docutils literal notranslate"><span class="pre">INDEX.FAST_MOVING_CONSUMER_GOODS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.FINANCIAL_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDEX.FINANCIAL_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.GREENEX"><code class="docutils literal notranslate"><span class="pre">INDEX.GREENEX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.HEALTHCARE"><code class="docutils literal notranslate"><span class="pre">INDEX.HEALTHCARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.INDIA_INFRASTRUCTURE"><code class="docutils literal notranslate"><span class="pre">INDEX.INDIA_INFRASTRUCTURE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.INDIA_MANUFACTURING"><code class="docutils literal notranslate"><span class="pre">INDEX.INDIA_MANUFACTURING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.INDUSTRIALS"><code class="docutils literal notranslate"><span class="pre">INDEX.INDUSTRIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.INFORMATION_TECHNOLOGY"><code class="docutils literal notranslate"><span class="pre">INDEX.INFORMATION_TECHNOLOGY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.IPO"><code class="docutils literal notranslate"><span class="pre">INDEX.IPO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.LARGECAP"><code class="docutils literal notranslate"><span class="pre">INDEX.LARGECAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.LOW_VOLATILITY"><code class="docutils literal notranslate"><span class="pre">INDEX.LOW_VOLATILITY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.METAL"><code class="docutils literal notranslate"><span class="pre">INDEX.METAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.MIDCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.MIDCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.MIDCAP_SELECT"><code class="docutils literal notranslate"><span class="pre">INDEX.MIDCAP_SELECT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.MOMENTUM"><code class="docutils literal notranslate"><span class="pre">INDEX.MOMENTUM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.OIL_GAS"><code class="docutils literal notranslate"><span class="pre">INDEX.OIL_GAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.POWER"><code class="docutils literal notranslate"><span class="pre">INDEX.POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.PRIVATE_BANKS"><code class="docutils literal notranslate"><span class="pre">INDEX.PRIVATE_BANKS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.PSU"><code class="docutils literal notranslate"><span class="pre">INDEX.PSU</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.QUALITY"><code class="docutils literal notranslate"><span class="pre">INDEX.QUALITY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.REALTY"><code class="docutils literal notranslate"><span class="pre">INDEX.REALTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SENSEX"><code class="docutils literal notranslate"><span class="pre">INDEX.SENSEX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SENSEX_50"><code class="docutils literal notranslate"><span class="pre">INDEX.SENSEX_50</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SENSEX_NEXT_50"><code class="docutils literal notranslate"><span class="pre">INDEX.SENSEX_NEXT_50</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SERVICES"><code class="docutils literal notranslate"><span class="pre">INDEX.SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SMALLCAP"><code class="docutils literal notranslate"><span class="pre">INDEX.SMALLCAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SMALLCAP_SELECT"><code class="docutils literal notranslate"><span class="pre">INDEX.SMALLCAP_SELECT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.SME_IPO"><code class="docutils literal notranslate"><span class="pre">INDEX.SME_IPO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.TECK"><code class="docutils literal notranslate"><span class="pre">INDEX.TECK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.TELECOMMUNICATION"><code class="docutils literal notranslate"><span class="pre">INDEX.TELECOMMUNICATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDEX.UTILITIES"><code class="docutils literal notranslate"><span class="pre">INDEX.UTILITIES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE"><code class="docutils literal notranslate"><span class="pre">PURPOSE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.BONUS"><code class="docutils literal notranslate"><span class="pre">PURPOSE.BONUS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.BUYBACK"><code class="docutils literal notranslate"><span class="pre">PURPOSE.BUYBACK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.DELISTING"><code class="docutils literal notranslate"><span class="pre">PURPOSE.DELISTING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.DIVIDEND"><code class="docutils literal notranslate"><span class="pre">PURPOSE.DIVIDEND</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.PREFERENCE_DIVIDEND"><code class="docutils literal notranslate"><span class="pre">PURPOSE.PREFERENCE_DIVIDEND</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.PURPOSE.SPLIT"><code class="docutils literal notranslate"><span class="pre">PURPOSE.SPLIT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.SECTOR"><code class="docutils literal notranslate"><span class="pre">SECTOR</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.AUTO"><code class="docutils literal notranslate"><span class="pre">SECTOR.AUTO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CAPITAL_GOODS"><code class="docutils literal notranslate"><span class="pre">SECTOR.CAPITAL_GOODS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CHEMICALS"><code class="docutils literal notranslate"><span class="pre">SECTOR.CHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CONSTRUCTION"><code class="docutils literal notranslate"><span class="pre">SECTOR.CONSTRUCTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CONSTRUCTION_MATERIALS"><code class="docutils literal notranslate"><span class="pre">SECTOR.CONSTRUCTION_MATERIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CONSUMER_DURABLES"><code class="docutils literal notranslate"><span class="pre">SECTOR.CONSUMER_DURABLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.CONSUMER_SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR.CONSUMER_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.DIVERSIFIED"><code class="docutils literal notranslate"><span class="pre">SECTOR.DIVERSIFIED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.FIN_SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR.FIN_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.FMCG"><code class="docutils literal notranslate"><span class="pre">SECTOR.FMCG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.FOREST_MATERIALS"><code class="docutils literal notranslate"><span class="pre">SECTOR.FOREST_MATERIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.IT"><code class="docutils literal notranslate"><span class="pre">SECTOR.IT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.MEDIA"><code class="docutils literal notranslate"><span class="pre">SECTOR.MEDIA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.METAL_MINING"><code class="docutils literal notranslate"><span class="pre">SECTOR.METAL_MINING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.OIL_GAS"><code class="docutils literal notranslate"><span class="pre">SECTOR.OIL_GAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.POWER"><code class="docutils literal notranslate"><span class="pre">SECTOR.POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.REALTY"><code class="docutils literal notranslate"><span class="pre">SECTOR.REALTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR.SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.TELECOM"><code class="docutils literal notranslate"><span class="pre">SECTOR.TELECOM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.TEXTILES"><code class="docutils literal notranslate"><span class="pre">SECTOR.TEXTILES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR.UTILITIES"><code class="docutils literal notranslate"><span class="pre">SECTOR.UTILITIES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.AUTOMOBILE"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.AUTOMOBILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CAPITAL_GOODS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CAPITAL_GOODS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CHEMICALS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CONSTRUCTION"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CONSTRUCTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CONSTRUCTION_MATERIALS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CONSTRUCTION_MATERIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CONSUMER_DURABLES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CONSUMER_DURABLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.CONSUMER_SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.CONSUMER_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.DIVERSIFIED"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.DIVERSIFIED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.FIN_SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.FIN_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.FMCG"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.FMCG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.FOREST_MATERIALS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.FOREST_MATERIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.HEALTHCARE"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.HEALTHCARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.IT"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.IT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.MEDIA"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.MEDIA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.METALS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.METALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.OIL_GAS"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.OIL_GAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.POWER"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.REALTY"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.REALTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.SERVICES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.TELECOMMUNICATION"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.TELECOMMUNICATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.TEXTILES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.TEXTILES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.SECTOR_ISIN.UTILITIES"><code class="docutils literal notranslate"><span class="pre">SECTOR_ISIN.UTILITIES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ABRASIVES_BEARINGS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ABRASIVES_BEARINGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ADVERTISING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ADVERTISING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AEROSPACE_DEFENSE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AEROSPACE_DEFENSE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AIRLINE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AIRLINE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AIRPORT_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AIRPORT_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ALUMINIUM"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ALUMINIUM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ALUMINIUM_COPPER_ZINC"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ALUMINIUM_COPPER_ZINC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AMUSEMENT_PARKS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AMUSEMENT_PARKS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ANIMAL_FEED"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ANIMAL_FEED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ASSET_MANAGEMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ASSET_MANAGEMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AUTO_COMPONENTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AUTO_COMPONENTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.AUTO_DEALER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.AUTO_DEALER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.BIOTECHNOLOGY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.BIOTECHNOLOGY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.BPO_KPO"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.BPO_KPO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.BREWERIES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.BREWERIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CABLES_ELECTRICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CABLES_ELECTRICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CARBON_BLACK"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CARBON_BLACK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CASTINGS_FORGINGS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CASTINGS_FORGINGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CEMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CEMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CERAMICS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CERAMICS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CIVIL_CONSTRUCTION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CIVIL_CONSTRUCTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.COAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.COAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.COMMERCIAL_VEHICLES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.COMMERCIAL_VEHICLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.COMMODITY_CHEMICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.COMMODITY_CHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.COMPRESSORS_PUMPS_ENGINES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.COMPRESSORS_PUMPS_ENGINES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CONSTRUCTION_VEHICLES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CONSTRUCTION_VEHICLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CONSULTING_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CONSULTING_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CONSUMER_ELECTRONICS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CONSUMER_ELECTRONICS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.COPPER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.COPPER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.CYCLES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.CYCLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DAIRY_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DAIRY_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DATA_PROCESSING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DATA_PROCESSING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DEPOSITORIES_CLEARING_HOUSES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DEPOSITORIES_CLEARING_HOUSES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIGITAL_ENTERTAINMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIGITAL_ENTERTAINMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DISTRIBUTORS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DISTRIBUTORS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED_COMMERCIAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED_COMMERCIAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED_CONSUMER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED_CONSUMER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED_FMCG"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED_FMCG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED_METALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED_METALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DIVERSIFIED_RETAIL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DIVERSIFIED_RETAIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DREDGING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DREDGING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.DYES_AND_PIGMENTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.DYES_AND_PIGMENTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ECOMMERCE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ECOMMERCE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.EDIBLE_OIL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.EDIBLE_OIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.EDUCATION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.EDUCATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ELEARNING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ELEARNING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ELECTRODES_REFRACTORIES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ELECTRODES_REFRACTORIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ELECTRONIC_MEDIA"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ELECTRONIC_MEDIA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.EXCHANGE_PLATFORM"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.EXCHANGE_PLATFORM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.EXPLOSIVES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.EXPLOSIVES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FERRO_SILICA_MANGANESE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FERRO_SILICA_MANGANESE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FERTILIZERS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FERTILIZERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FILM_PRODUCTION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FILM_PRODUCTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FINANCIAL_INSTITUTION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FINANCIAL_INSTITUTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FINANCIAL_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FINANCIAL_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FINTECH"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FINTECH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FOOD_STORAGE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FOOD_STORAGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FOOTWEAR"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FOOTWEAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FOREST_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FOREST_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FURNITURE_HOME_FURNISHING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FURNITURE_HOME_FURNISHING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.FURNITURE_HOME_FURNISHING_FLOORING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.FURNITURE_HOME_FURNISHING_FLOORING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GARMENTS_APPARELS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GARMENTS_APPARELS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GAS_TRANSMISSION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GAS_TRANSMISSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GENERAL_INSURANCE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GENERAL_INSURANCE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GLASS_CONSUMER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GLASS_CONSUMER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GLASS_INDUSTRIAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GLASS_INDUSTRIAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.GRANITES_MARBLES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.GRANITES_MARBLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HEALTHCARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HEALTHCARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HEALTHCARE_SERVICE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HEALTHCARE_SERVICE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HEAVY_ELECTRICAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HEAVY_ELECTRICAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOLDING_COMPANY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOLDING_COMPANY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOSPITAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOSPITAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOTELS_RESORTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOTELS_RESORTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOUSEHOLD_APPLIANCES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOUSEHOLD_APPLIANCES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOUSEHOLD_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOUSEHOLD_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOUSEWARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOUSEWARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.HOUSING_FINANCE_COMPANY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.HOUSING_FINANCE_COMPANY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INDUSTRIAL_GASES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INDUSTRIAL_GASES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INDUSTRIAL_MACHINERY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INDUSTRIAL_MACHINERY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INDUSTRIAL_MINERALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INDUSTRIAL_MINERALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INDUSTRIAL_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INDUSTRIAL_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INTEGRATED_POWER_UTILITIES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INTEGRATED_POWER_UTILITIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INTERNET_CATALOGUE_RETAIL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INTERNET_CATALOGUE_RETAIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.INVESTMENT_COMPANY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.INVESTMENT_COMPANY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.IRON_STEEL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.IRON_STEEL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.IRON_STEEL_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.IRON_STEEL_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.IT_ENABLED_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.IT_ENABLED_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.IT_HARDWARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.IT_HARDWARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.IT_SOFTWARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.IT_SOFTWARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.JEWELLERY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.JEWELLERY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.JUTE_JUTE_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.JUTE_JUTE_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LEATHER_AND_LEATHER_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LEATHER_AND_LEATHER_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LEISURE_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LEISURE_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LIFE_INSURANCE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LIFE_INSURANCE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LOGISTICS_SOLUTION_PROVIDER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LOGISTICS_SOLUTION_PROVIDER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LPG_CNG_PNG_LNG"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LPG_CNG_PNG_LNG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.LUBRICANTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.LUBRICANTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.MEAT_PRODUCTS_INCLUDING_POULTRY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.MEAT_PRODUCTS_INCLUDING_POULTRY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.MEDIA_ENTERTAINMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.MEDIA_ENTERTAINMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.MEDICAL_EQUIPMENT_SUPPLIES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.MEDICAL_EQUIPMENT_SUPPLIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.MICROFINANCE_INSTITUTIONS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.MICROFINANCE_INSTITUTIONS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.MUTUAL_FUND"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.MUTUAL_FUND</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.NBFC"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.NBFC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OFFSHORE_DRILLING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OFFSHORE_DRILLING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OIL_EQUIPMENT_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OIL_EQUIPMENT_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OIL_EXPLORATION_PRODUCTION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OIL_EXPLORATION_PRODUCTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OIL_STORAGE_TRANSPORT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OIL_STORAGE_TRANSPORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_AGRICULTURAL_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_AGRICULTURAL_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_BANK"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_BANK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_BEVERAGES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_BEVERAGES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_CAPITAL_MARKET_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_CAPITAL_MARKET_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_CONSTRUCTION_MATERIALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_CONSTRUCTION_MATERIALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_CONSUMER_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_CONSUMER_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_ELECTRICAL_EQUIPMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_ELECTRICAL_EQUIPMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_FINANCIAL_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_FINANCIAL_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_FOOD_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_FOOD_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_INDUSTRIAL_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_INDUSTRIAL_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_TELECOM_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_TELECOM_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_TEXTILE_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_TEXTILE_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.OTHER_UTILITIES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.OTHER_UTILITIES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PACKAGED_FOODS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PACKAGED_FOODS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PACKAGING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PACKAGING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PAINTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PAINTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PAPER_PAPER_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PAPER_PAPER_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PASSENGER_CARS_UTILITY_VEHICLES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PASSENGER_CARS_UTILITY_VEHICLES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PERSONAL_CARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PERSONAL_CARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PESTICIDES_AGROCHEMICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PESTICIDES_AGROCHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PETROCHEMICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PETROCHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PHARMACEUTICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PHARMACEUTICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PHARMACY_RETAIL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PHARMACY_RETAIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PHOTOGRAPHIC_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PHOTOGRAPHIC_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PIG_IRON"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PIG_IRON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PLASTIC_PRODUCTS_CONSUMER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PLASTIC_PRODUCTS_CONSUMER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PLASTIC_PRODUCTS_INDUSTRIAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PLASTIC_PRODUCTS_INDUSTRIAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PLYWOOD_BOARDS_LAMINATES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PLYWOOD_BOARDS_LAMINATES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PORT_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PORT_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.POWER_GENERATION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.POWER_GENERATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.POWER_TRADING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.POWER_TRADING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.POWER_TRANSMISSION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.POWER_TRANSMISSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PRECIOUS_METALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PRECIOUS_METALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PRINTING_INKS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PRINTING_INKS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PRINTING_PUBLICATION"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PRINTING_PUBLICATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PRINT_MEDIA"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PRINT_MEDIA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PRIVATE_SECTOR_BANK"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PRIVATE_SECTOR_BANK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.PUBLIC_SECTOR_BANK"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.PUBLIC_SECTOR_BANK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.RAILWAY_WANS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.RAILWAY_WANS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.RATINGS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.RATINGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.REAL_ESTATE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.REAL_ESTATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.REFINERIES_MARKETING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.REFINERIES_MARKETING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.REITS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.REITS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.RESIDENTIAL_COMMERCIAL_PROJECTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.RESIDENTIAL_COMMERCIAL_PROJECTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.RESTAURANTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.RESTAURANTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ROAD_ASSETS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ROAD_ASSETS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ROAD_TRANSPORT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ROAD_TRANSPORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.RUBBER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.RUBBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SANITARY_WARE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SANITARY_WARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SEAFOOD"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SEAFOOD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SHIPPING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SHIPPING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SHIP_BUILDING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SHIP_BUILDING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SOFTWARE_PRODUCTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SOFTWARE_PRODUCTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SPECIALITY_RETAIL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SPECIALITY_RETAIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SPECIALTY_CHEMICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SPECIALTY_CHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SPONGE_IRON"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SPONGE_IRON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.STATIONARY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.STATIONARY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.STOCKBROKING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.STOCKBROKING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.SUGAR"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.SUGAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TEA_COFFEE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TEA_COFFEE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TELECOM_CELLULAR"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TELECOM_CELLULAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TELECOM_EQUIPMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TELECOM_EQUIPMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TELECOM_INFRASTRUCTURE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TELECOM_INFRASTRUCTURE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TOBACCO"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TOBACCO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TOUR_TRAVEL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TOUR_TRAVEL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRACTORS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRACTORS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_AUTO_COMPONENTS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_AUTO_COMPONENTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_CHEMICALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_CHEMICALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_COAL"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_COAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_DISTRIBUTORS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_DISTRIBUTORS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_GAS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_GAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_METALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_METALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_MINERALS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_MINERALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRADING_TEXTILE"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRADING_TEXTILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TRANSPORT_RELATED_SERVICES"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TRANSPORT_RELATED_SERVICES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TV_BROADCASTING"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TV_BROADCASTING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TWO_WHEELERS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TWO_WHEELERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.TYRES_RUBBER"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.TYRES_RUBBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.WASTE_MANAGEMENT"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.WASTE_MANAGEMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.WATER_SUPPLY"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.WATER_SUPPLY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.WELLNESS"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.WELLNESS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Constants.html#bse.constants.INDUSTRY.ZINC"><code class="docutils literal notranslate"><span class="pre">INDUSTRY.ZINC</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="usage.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Usage</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Benny Thadikaran
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to BSE’s documentation!</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>
