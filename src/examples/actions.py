@@ -6,10 +6,10 @@ today = datetime.today().date()
 
 with BSE() as bse:
     code = bse.getScripCode(argv[1])
-    data = bse.corporateActions(code)
+    data = bse.actions(scripcode=code)
 
 
-for item in data['recent_actions']:
+for item in data:
     exDt = datetime.strptime(item['Ex_date'], '%d %b %Y').date()
     recordDt = datetime.strptime(item['BCRD'].split(" ")[1], '%d/%m/%Y').date()
     payDt = item['PAYMENT_DATE'].split("T")[0]

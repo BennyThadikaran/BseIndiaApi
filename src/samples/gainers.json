@@ -1,0 +1,26 @@
+[
+  {
+    "scrip_cd": 541770,
+    "scripname": "CREDITACC",
+    "LONG_NAME": "CreditAccess Grameen Ltd",
+    "scrip_grp": "A",
+    "openrate": 1439.65,
+    "highrate": 1560.0,
+    "lowrate": 1425.9,
+    "ltradert": 1523.05,
+    "prevdayclose": 1389.55,
+    "change_val": 133.5,
+    "change_percent": 9.61,
+    "index_code": "|S&P BSE 500|,|S&P BSE SmallCap|,|S&P BSE 250 SmallCap Index|,|S&P BSE 400 MidSmallCap Index|,|S&P BSE AllCap|,|S&P BSE Diversified Financials Revenue Growth Index|,|S&P BSE Financial Services|",
+    "trd_val": 1531.0,
+    "trd_vol": 101527,
+    "nooftrd": 5827,
+    "trend": "",
+    "dt_tm": "2023-10-23T13:02:34",
+    "Ishighflag": 1,
+    "IsLowflag": 0,
+    "URL": "https://www.bseindia.com/stock-share-price/creditaccess-grameen-ltd/creditacc/541770/",
+    "NSUrl": "https://www.bseindia.com/stock-share-price/creditaccess-grameen-ltd/creditacc/541770/"
+  }
+]
+

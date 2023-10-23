@@ -1,0 +1,25 @@
+[
+  {
+    "scrip_cd": 500185,
+    "scripname": "HCC",
+    "LONG_NAME": "HINDUSTAN CONSTRUCTION CO.LTD.",
+    "scrip_grp": "A",
+    "openrate": 27.78,
+    "highrate": 27.93,
+    "lowrate": 24.85,
+    "ltradert": 24.95,
+    "prevdayclose": 27.79,
+    "change_val": -2.84,
+    "change_percent": -10.22,
+    "index_code": "|S&P BSE SmallCap|,|S&P BSE AllCap|,|S&P BSE Industrials|",
+    "trd_val": 1114.0,
+    "trd_vol": 4301902,
+    "nooftrd": 5011,
+    "trend": "",
+    "dt_tm": "2023-10-23T13:31:56",
+    "Ishighflag": 0,
+    "IsLowflag": 0,
+    "URL": "https://www.bseindia.com/stock-share-price/hindustan-construction-coltd/hcc/500185/",
+    "NSUrl": "https://www.bseindia.com/stock-share-price/hindustan-construction-coltd/hcc/500185/"
+  }
+]

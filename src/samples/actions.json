@@ -1,0 +1,45 @@
+[
+  {
+    "scrip_code": 500209,
+    "short_name": "INFY",
+    "Ex_date": "25 Oct 2023",
+    "Purpose": "Interim Dividend - Rs. - 18.0000",
+    "RD_Date": "25 Oct 2023",
+    "BCRD_FROM": "",
+    "BCRD_TO": "",
+    "ND_START_DATE": "18 Oct 2023",
+    "ND_END_DATE": "25 Oct 2023",
+    "payment_date": "",
+    "exdate": "20231025",
+    "long_name": "INFOSYS LTD."
+  },
+  {
+    "scrip_code": 520066,
+    "short_name": "JAYBARMARU",
+    "Ex_date": "26 Oct 2023",
+    "Purpose": "Stock  Split From Rs.5/- to Rs.2/-",
+    "RD_Date": "26 Oct 2023",
+    "BCRD_FROM": "",
+    "BCRD_TO": "",
+    "ND_START_DATE": "19 Oct 2023",
+    "ND_END_DATE": "26 Oct 2023",
+    "payment_date": "",
+    "exdate": "20231026",
+    "long_name": "JAY BHARAT MARUTI LTD."
+  },
+  {
+    "scrip_code": 543464,
+    "short_name": "SPITZE",
+    "Ex_date": "27 Oct 2023",
+    "Purpose": "Bonus issue 1:1",
+    "RD_Date": "27 Oct 2023",
+    "BCRD_FROM": "",
+    "BCRD_TO": "",
+    "ND_START_DATE": "23 Oct 2023",
+    "ND_END_DATE": "27 Oct 2023",
+    "payment_date": "",
+    "exdate": "20231027",
+    "long_name": "Maruti Interior Products Ltd"
+  }
+]
+

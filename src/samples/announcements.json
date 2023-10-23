@@ -1,56 +1,39 @@
-[
-   {
-      "NEWSID": "aff9f460-59a4-4e39-b926-3b4a30ad4b9d",
-      "SCRIP_CD": 500209,
-      "XML_NAME": "ANN_500209_AFF9F460-59A4-4E39-B926-3B4A30AD4B9D",
-      "NEWSSUB": "Infosys To Announce Second Quarter Results On October 12, 2023",
-      "DT_TM": "2023-10-05T15:35:53.37",
-      "NEWS_DT": "2023-10-05T15:35:53.37",
+{
+  "Table": [
+    {
+      "NEWSID": "6fb57b5e-a05f-4e05-b2da-6e2b5bfe32ae",
+      "SCRIP_CD": 517397,
+      "XML_NAME": "ANN_517397_6FB57B5E-A05F-4E05-B2DA-6E2B5BFE32AE",
+      "NEWSSUB": "PAN ELECTRONICS INDIA LTD. - 517397 - Compliances-Reg. 39 (3) - Details of Loss of Certificate / Duplicate Certificate",
+      "DT_TM": "2023-10-20T23:44:22.95",
+      "NEWS_DT": "2023-10-20T23:44:22.95",
       "CRITICALNEWS": 0,
       "ANNOUNCEMENT_TYPE": "A",
       "QUARTER_ID": null,
       "FILESTATUS": "N    ",
-      "ATTACHMENTNAME": "88ca75db-ea24-47d9-9af6-bf476a7154f1.pdf",
+      "ATTACHMENTNAME": "aab502e1-3e05-4fdc-bc10-ecbb436cab8d.pdf",
       "MORE": "",
-      "HEADLINE": "Press release enclosed",
-      "CATEGORYNAME": "Company Update",
+      "HEADLINE": "Issuance of duplicate share certificate in lieu of loss of original share certificate.",
+      "CATEGORYNAME": null,
       "OLD": 1,
       "RN": 1,
-      "PDFFLAG": 0,
-      "NSURL": "https://www.bseindia.com/stock-share-price/infosys-ltd/infy/500209/",
-      "SLONGNAME": "INFOSYS LTD.",
-      "AGENDA_ID": 1,
-      "TotalPageCnt": 1,
-      "News_submission_dt": "2023-10-05T15:35:53",
-      "DissemDT": "2023-10-05T15:35:53.37",
+      "PDFFLAG": 1,
+      "NSURL": "https://www.bseindia.com/stock-share-price/pan-electronics-india-ltd/panelec/517397/",
+      "SLONGNAME": "PAN ELECTRONICS INDIA LTD.",
+      "AGENDA_ID": 177,
+      "TotalPageCnt": 22,
+      "News_submission_dt": "2023-10-20T23:44:22",
+      "DissemDT": "2023-10-20T23:44:22.95",
       "TimeDiff": "00:00:00",
-      "Fld_Attachsize": 346458
-   },
-   {
-      "NEWSID": "6b21a3ed-ecca-4862-94b5-272945b054ef",
-      "SCRIP_CD": 500209,
-      "XML_NAME": "ANN_500209_6B21A3ED-ECCA-4862-94B5-272945B054EF",
-      "NEWSSUB": "Economist Impact And Infosys Launch The Value Chain Navigator To Help Businesses Manage And Mitigate Their Scope 3 Emissions",
-      "DT_TM": "2023-10-05T15:23:30.38",
-      "NEWS_DT": "2023-10-05T15:23:30.38",
-      "CRITICALNEWS": 0,
-      "ANNOUNCEMENT_TYPE": "A",
-      "QUARTER_ID": null,
-      "FILESTATUS": "N    ",
-      "ATTACHMENTNAME": "b042cd7a-8f87-4670-93b8-80298012993e.pdf",
-      "MORE": "",
-      "HEADLINE": "Press release enclosed",
-      "CATEGORYNAME": "Company Update",
-      "OLD": 1,
-      "RN": 1,
-      "PDFFLAG": 0,
-      "NSURL": "https://www.bseindia.com/stock-share-price/infosys-ltd/infy/500209/",
-      "SLONGNAME": "INFOSYS LTD.",
-      "AGENDA_ID": 1,
-      "TotalPageCnt": 1,
-      "News_submission_dt": "2023-10-05T15:23:30",
-      "DissemDT": "2023-10-05T15:23:30.38",
-      "TimeDiff": "00:00:00",
-      "Fld_Attachsize": 350398
-   }
-]
+      "Fld_Attachsize": 626877,
+      "SUBCATNAME": "Reg. 39 (3) - Details of Loss of Certificate / Duplicate Certificate",
+      "AUDIO_VIDEO_FILE": null
+    }
+  ],
+  "Table1": [
+    {
+      "ROWCNT": 1292
+    }
+  ]
+}
+
