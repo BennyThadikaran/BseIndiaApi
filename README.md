@@ -60,8 +60,8 @@ The files are named after the corresponding method in `src/BSE.py`. Use it to un
 
 To use the scripts download or clone the repo.
 
-- **get_all_announcements.py**: This file demonstrates how to paginate and get all announcements using `BSE.announcements`. It has step by step explanation of code.
-- **actions.py**: `py actions.py infy` to print the recent corporate actions. Nothing more.
-- **advances.py**: `py advances.py` to print the advance decline ratios for various bse Indexes.
+- [get_all_announcements.py](https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/examples/get_all_announcements.py): This file demonstrates how to paginate and get all announcements using `BSE.announcements`. It has step by step explanation of code.
+- [actions.py](https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/examples/actions.py): `py actions.py infy` to print the recent corporate actions. Nothing more.
+- [advances.py](https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/examples/advances.py): `py advances.py` to print the advance decline ratios for various bse Indexes.
 
 You may also like my other repo: [Stock-News](https://github.com/BennyThadikaran/stock-news) - It uses BseIndiaApi and displays stock announcements, dividend, bonus/splits and upcoming results etc for your portfolio or watchlist stocks.
