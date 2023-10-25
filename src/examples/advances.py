@@ -95,10 +95,12 @@ for idx in data:
 
         sector_out += f"{idx_name}: {ratio}   ▲ {up}   ▼ {down}  {unchanged}\n"
 
+HR = '-' * 58
+
 print(f'{C.CYAN}++ : Very Strong   + : Strong     -   : Weak')
 
 print(f'▲  : Uptrend       ▼ : Downtrend  ◀ ▶ : Neutral{C.ENDC}\n')
 
-print(f"{C.CYAN}Broad Market\n{'-' * 58}{C.ENDC}\n{broad_out}")
+print(f"{C.CYAN}Broad Market\n{HR}{C.ENDC}\n{broad_out}")
 
-print(f"{C.CYAN}Sector Wise\n{'-' * 58}{C.ENDC}\n{sector_out}")
+print(f"{C.CYAN}Sector Wise\n{HR}{C.ENDC}\n{sector_out}")
