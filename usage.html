@@ -237,7 +237,11 @@
 <dd class="field-odd"><p><strong>scripcode</strong> – BSE scrip code</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if scrip not found</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if scrip not found</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Symbol code</p>
@@ -259,7 +263,11 @@
 <dd class="field-odd"><p><strong>scripname</strong> – Stock symbol code</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if scrip not found</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if scrip not found</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>BSE scrip code</p>
@@ -277,19 +285,21 @@ HDFCBANK -&gt; ‘500180’</p>
 <h2>Download Reports<a class="headerlink" href="#download-reports" title="Link to this heading">#</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="bse.BSE.bhavcopyReport">
-<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">bhavcopyReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bse.BSE.bhavcopyReport" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">bhavcopyReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bse.BSE.bhavcopyReport" title="Link to this definition">#</a></dt>
 <dd><p>Download the daily bhavcopy report for specified <code class="docutils literal notranslate"><span class="pre">date</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>date</strong> (<em>datetime.datetime</em>) – date of report</p></li>
-<li><p><strong>folder</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – dir/folder to download the file to</p></li>
+<li><p><strong>folder</strong> (<em>str</em><em> or </em><em>pathlib.Path</em><em> or </em><em>None</em>) – Optional dir/folder to save the file to</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">folder</span></code> is not a dir/folder.</p></li>
+<li><p><strong>RuntimeError</strong> – if report is unavailable or not yet updated.</p></li>
 <li><p><strong>FileNotFoundError</strong> – if file download failed or file is corrupt.</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -304,19 +314,21 @@ HDFCBANK -&gt; ‘500180’</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bse.BSE.deliveryReport">
-<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">deliveryReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bse.BSE.deliveryReport" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">deliveryReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bse.BSE.deliveryReport" title="Link to this definition">#</a></dt>
 <dd><p>Download the daily delivery report for specified <code class="docutils literal notranslate"><span class="pre">date</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>date</strong> (<em>datetime.datetime</em>) – date of report</p></li>
-<li><p><strong>folder</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – dir/folder to download the file to</p></li>
+<li><p><strong>folder</strong> (<em>str</em><em> or </em><em>pathlib.Path</em><em> or </em><em>None</em>) – Optional dir/folder to save the file to</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">folder</span></code> is not a dir/folder.</p></li>
+<li><p><strong>RuntimeError</strong> – if report is unavailable or not yet updated.</p></li>
 <li><p><strong>FileNotFoundError</strong> – if file download failed or file is corrupt.</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -347,7 +359,11 @@ HDFCBANK -&gt; ‘500180’</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code> or <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> argument is passed without <code class="docutils literal notranslate"><span class="pre">category</span></code></p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code> or <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> argument is passed without <code class="docutils literal notranslate"><span class="pre">category</span></code></p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>All announcements. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/announcements.json">Sample response</a></p>
@@ -402,7 +418,11 @@ If not provided, the current date and time is considered.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code></p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code></p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of actions. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/actions.json">Sample response</a></p>
@@ -437,7 +457,11 @@ If not provided, the current date and time is considered.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code></p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code></p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of Corporate results. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/resultCalendar.json">Sample response</a></p>
@@ -467,7 +491,11 @@ If not provided, the current date and time is considered.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of top gainers by percent change. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/gainers.json">Sample response</a></p>
@@ -506,7 +534,11 @@ stocks are filtered by range of percent change.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of top losers by percent change. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/losers.json">Sample response</a></p>
@@ -544,7 +576,11 @@ stocks are filtered by range of percent change.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a valid BSE stock group.</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Stocks near 52 week high and lows. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/near52WeekHighLow.json">Sample response</a></p>
@@ -577,11 +613,17 @@ stocks are filtered by range of percent change.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>OHLC data for given scripcode. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quote.json">Sample response</a></p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, float]</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>OHLC data for given scripcode. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quote.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -594,11 +636,17 @@ stocks are filtered by range of percent change.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Weekly and monthly high and lows with dates. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quoteWeeklyHL.json">Sample response</a></p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Weekly and monthly high and lows with dates. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quoteWeeklyHL.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -618,7 +666,11 @@ stocks are filtered by range of percent change.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid BSE stock group</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid BSE stock group</p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of securities with meta info. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/listSecurities.json">Sample response</a></p>
