@@ -31,6 +31,8 @@ Example
 API
 ___
 
+.. autoclass:: bse.BSE
+
 General Methods
 ---------------
 
