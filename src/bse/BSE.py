@@ -21,7 +21,12 @@ th = Throttle(throttle_config, 15)
 
 
 class BSE:
-    '''Unofficial Python Api for BSE India'''
+    '''Unofficial Python Api for BSE India
+
+    :param download_folder: A folder/dir to save downloaded files and cookie files
+    :type download_folder: pathlib.Path or str
+    :raise ValueError: if ``download_folder`` is not a folder/dir
+    '''
 
     base_url = 'https://www.bseindia.com/'
     api_url = 'https://api.bseindia.com/BseIndiaAPI/api'
@@ -30,7 +35,7 @@ class BSE:
                     'MT', 'P', 'R', 'T', 'TS', 'W', 'X', 'XD', 'XT', 'Y', 'Z',
                     'ZP', 'ZY')
 
-    def __init__(self):
+    def __init__(self, download_folder: str | Path):
         self.session = Session()
         ua = 'Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/118.0'
 
@@ -42,16 +47,15 @@ class BSE:
             'Referer': self.base_url,
         })
 
+        self.dir = BSE.__getPath(download_folder, isFolder=True)
+
     def __enter__(self):
         return self
 
-    def __exit__(self, exc_type, exc_value, exc_traceback):
+    def __exit__(self, *_):
         self.session.close()
 
-        if exc_type:
-            exit(f'{exc_type}: {exc_value} | {exc_traceback}')
-
-        return True
+        return False
 
     def exit(self):
         '''Close the Request session'''
@@ -78,13 +82,17 @@ class BSE:
         try:
             with self.session.get(url,
                                   stream=True,
-                                  timeout=15) as r:
+                                  timeout=10) as r:
+
+                if r.status_code == 404:
+                    raise RuntimeError(
+                        'Report is unavailable or not yet updated.')
 
                 with fname.open(mode='wb') as f:
                     for chunk in r.iter_content(chunk_size=1000000):
                         f.write(chunk)
-        except Exception as e:
-            exit(f'Download error. Try again later: {e!r}')
+        except ReadTimeout:
+            raise TimeoutError('Request timed out')
 
         return fname
 
@@ -130,57 +138,61 @@ class BSE:
 
         return path
 
-    def bhavcopyReport(self, date: datetime, folder: str | Path):
+    def bhavcopyReport(self, date: datetime, folder: str | Path | None = None):
         '''
         Download the daily bhavcopy report for specified ``date``
 
         :param date: date of report
         :type date: datetime.datetime
-        :param folder: dir/folder to download the file to
-        :type folder: str or pathlib.Path
+        :param folder: Optional dir/folder to save the file to
+        :type folder: str or pathlib.Path or None
         :raise ValueError: if ``folder`` is not a dir/folder.
+        :raise RuntimeError: if report is unavailable or not yet updated.
         :raise FileNotFoundError: if file download failed or file is corrupt.
+        :raise TimeoutError: if request timed out with no response
         :return: file path of downloaded report
         :rtype: pathlib.Path
 
         Zip file is extracted and saved filepath returned.
         '''
 
-        folder = BSE.__getPath(folder, isFolder=True)
+        folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
 
         url = f'{self.base_url}/download/BhavCopy/Equity/EQ_ISINCODE_{date:%d%m%y}.zip'
 
         file = self.__download(url, folder)
 
-        if not file.is_file() or file.stat().st_size < 5000:
+        if not file.exists():
             file.unlink()
             raise FileNotFoundError(f'Failed to download file: {file.name}')
 
         return BSE.__unzip(file, file.parent)
 
-    def deliveryReport(self, date: datetime, folder: str | Path):
+    def deliveryReport(self, date: datetime, folder: str | Path | None = None):
         '''
         Download the daily delivery report for specified ``date``
 
         :param date: date of report
         :type date: datetime.datetime
-        :param folder: dir/folder to download the file to
-        :type folder: str or pathlib.Path
+        :param folder: Optional dir/folder to save the file to
+        :type folder: str or pathlib.Path or None
         :raise ValueError: if ``folder`` is not a dir/folder.
+        :raise RuntimeError: if report is unavailable or not yet updated.
         :raise FileNotFoundError: if file download failed or file is corrupt.
+        :raise TimeoutError: if request timed out with no response
         :return: file path of downloaded report
         :rtype: pathlib.Path
 
         Zip file is extracted, converted to CSV, and saved filepath is returned
         '''
 
-        folder = BSE.__getPath(folder, isFolder=True)
+        folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
 
         url = f'{self.base_url}/BSEDATA/gross/{date:%Y}/SCBSEALL{date:%d%m}.zip'
 
         file = self.__download(url, folder)
 
-        if not file.is_file() or file.stat().st_size < 5000:
+        if not file.exists():
             file.unlink()
             raise FileNotFoundError(f'Failed to download file: {file.name}')
 
@@ -188,7 +200,7 @@ class BSE:
 
         file.write_bytes(file.read_bytes().replace(b'|', b','))
 
-        return file.rename(file.with_suffix('.csv'))
+        return file.replace(file.with_suffix('.csv'))
 
     def announcements(self,
                       page_no: int = 1,
@@ -212,6 +224,8 @@ class BSE:
         :param subcategory: (Optional). Filter announcements by subcategory ex. ``Dividend``.
         :type subcategory: str
         :raise ValueError: if ``from_date`` is greater than ``to_date`` or ``subcategory`` argument is passed without ``category``
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: All announcements. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/announcements.json>`__
         :rtype: dict[str, list[dict]]
 
@@ -308,6 +322,8 @@ class BSE:
         :param purpose_code: Limit result to actions with given purpose
         :type purpose_code: str
         :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of actions. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/actions.json>`__
         :rtype: list[dict]
 
@@ -376,6 +392,8 @@ class BSE:
         :param scripcode: (Optional). Limit result to stock symbol
         :type scripcode: str
         :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of Corporate results. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/resultCalendar.json>`__
         :rtype: list[dict]
 
@@ -411,6 +429,8 @@ class BSE:
         '''
         Advance decline values for all BSE indices
 
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Advance decline values. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/advanceDecline.json>`__
         :rtype: list[dict]
         '''
@@ -437,6 +457,8 @@ class BSE:
         :param pct_change: Default ``all``. Filter stocks by percent change. One of ``10``, ``5``, ``2``, ``0``.
         :type pct_change: str
         :raise ValueError: if ``name`` is not a valid BSE stock group.
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of top gainers by percent change. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/gainers.json>`__
         :rtype: list[dict]
 
@@ -500,6 +522,8 @@ class BSE:
         :param pct_change: Default ``all``. Filter stocks by percent change. One of ``10``, ``5``, ``2``, ``0``.
         :type pct_change: str
         :raise ValueError: if ``name`` is not a valid BSE stock group.
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of top losers by percent change. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/losers.json>`__
         :rtype: list[dict]
 
@@ -562,6 +586,8 @@ class BSE:
         :param name: (Optional). Stock group name or Market index name.
         :type name: str
         :raise ValueError: if ``name`` is not a valid BSE stock group.
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Stocks near 52 week high and lows. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/near52WeekHighLow.json>`__
         :rtype: dict
 
@@ -625,6 +651,8 @@ class BSE:
 
         :param scripcode: BSE scrip code
         :type scripcode: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: OHLC data for given scripcode. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quote.json>`__
         :rtype: dict[str, float]
         '''
@@ -654,6 +682,8 @@ class BSE:
 
         :param scripcode: BSE scrip code
         :type scripcode: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Weekly and monthly high and lows with dates. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quoteWeeklyHL.json>`__
         :rtype: dict
         '''
@@ -700,6 +730,8 @@ class BSE:
         :param segment: Default 'Equity'. One of ``equity``, ``mf``, ``Preference Shares``, ``Debentures and Bonds``, ``Equity - Institutional Series``, ``Commercial Papers``
         :param status: Default 'Active'. One of ``active``, ``suspended``, or ``delisted``
         :raise ValueError: if ``group`` is not a valid BSE stock group
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: list of securities with meta info. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/listSecurities.json>`__
         :rtype: list[dict]
 
@@ -744,6 +776,8 @@ class BSE:
 
         :param scripcode: BSE scrip code
         :raise ValueError: if scrip not found
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Symbol code
         :rtype: str
 
@@ -768,6 +802,8 @@ class BSE:
 
         :param scripname: Stock symbol code
         :raise ValueError: if scrip not found
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: BSE scrip code
         :rtype: str
 
