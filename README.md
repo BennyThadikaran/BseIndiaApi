@@ -7,7 +7,7 @@ Python version: >= 3.10
 ## Install with PIP
 
 ```
-pip install bse
+pip install -U bse
 ```
 
 ## Documentation
@@ -23,14 +23,12 @@ Using with statement
 ```python
 from bse import BSE
 
-with BSE() as bse:
-    scripCode = bse.getScripCode('tcs') # 532540 bse scrip code
+with BSE(download_folder='./') as bse:
+    scripCode = bse.getScripCode('tcs')  # 532540 bse scrip code
 
-    bse.getScripName('532540') # TCS
+    data = bse.actions(scripcode=scripCode)
 
-    data = bse.corporateActions(scripCode)
-
-    oclc = bse.quote(scripCode) # Open, High, Low, LTP
+    ohlc = bse.quote(scripCode)  # Open, High, Low, LTP
 ```
 
 or
@@ -39,13 +37,13 @@ or
 from bse import BSE
 from bse.constants import INDEX
 
-bse = BSE()
+bse = BSE(download_folder='./')
 
-code = bse.getScripCode('tcs') # 532540 bse scrip code
+code = bse.getScripCode('tcs')  # 532540 bse scrip code
 
 gainers = bse.gainers(by='index', name=INDEX.BSE500)
 
-bse.exit() # close the request session
+bse.exit()  # close the request session
 ```
 
 ## Sample Responses
