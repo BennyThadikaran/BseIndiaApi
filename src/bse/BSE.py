@@ -1,10 +1,11 @@
+from __future__ import annotations
 from requests import Session
 from requests.exceptions import ReadTimeout
 from re import search
 from pathlib import Path
 from zipfile import ZipFile
 from mthrottle import Throttle
-from typing import Literal
+from typing import Literal, Dict, List
 from datetime import datetime
 
 throttle_config = {
@@ -15,7 +16,6 @@ throttle_config = {
         'rps': 8,
     }
 }
-
 
 th = Throttle(throttle_config, 15)
 
@@ -80,9 +80,7 @@ class BSE:
         th.check()
 
         try:
-            with self.session.get(url,
-                                  stream=True,
-                                  timeout=10) as r:
+            with self.session.get(url, stream=True, timeout=10) as r:
 
                 if r.status_code == 404:
                     raise RuntimeError(
@@ -98,9 +96,7 @@ class BSE:
 
     def __req(self, url, params=None, timeout=10):
         try:
-            response = self.session.get(url,
-                                        params=params,
-                                        timeout=timeout)
+            response = self.session.get(url, params=params, timeout=timeout)
         except ReadTimeout:
             raise TimeoutError('Request timed out')
 
@@ -114,10 +110,7 @@ class BSE:
 
         url = f'{self.api_url}/PeerSmartSearch/w'
 
-        params = {
-            'Type': 'SS',
-            'text': scrip
-        }
+        params = {'Type': 'SS', 'text': scrip}
 
         th.check('lookup')
 
@@ -209,7 +202,7 @@ class BSE:
                       segment: Literal['equity', 'debt', 'mf_etf'] = 'equity',
                       scripcode: str | None = None,
                       category: str = '-1',
-                      subcategory: str = '-1') -> dict[str, list[dict]]:
+                      subcategory: str = '-1') -> Dict[str, List[dict]]:
         '''
         All corporate announcements
 
@@ -303,7 +296,7 @@ class BSE:
                 by_date: Literal['ex', 'record', 'bc_start'] = 'ex',
                 scripcode: str | None = None,
                 sector: str = '',
-                purpose_code: str | None = None) -> list[dict]:
+                purpose_code: str | None = None) -> List[dict]:
         '''
         All forthcoming corporate actions
 
@@ -381,7 +374,7 @@ class BSE:
     def resultCalendar(self,
                        from_date: datetime | None = None,
                        to_date: datetime | None = None,
-                       scripcode: str | None = None) -> list[dict]:
+                       scripcode: str | None = None) -> List[dict]:
         '''
         Corporate result calendar
 
@@ -425,7 +418,7 @@ class BSE:
 
         return self.__req(url, params=params).json()
 
-    def advanceDecline(self) -> list[dict]:
+    def advanceDecline(self) -> List[dict]:
         '''
         Advance decline values for all BSE indices
 
@@ -443,10 +436,12 @@ class BSE:
 
         return response.json()
 
-    def gainers(self,
-                by: Literal['group', 'index', 'all'] = 'group',
-                name: str | None = None,
-                pct_change: Literal['all', '10', '5', '2', '0'] = 'all') -> list[dict]:
+    def gainers(
+            self,
+            by: Literal['group', 'index', 'all'] = 'group',
+            name: str | None = None,
+            pct_change: Literal['all', '10', '5', '2',
+                                '0'] = 'all') -> List[dict]:
         '''
         List of top gainers
 
@@ -508,10 +503,12 @@ class BSE:
 
         return self.__req(url, params=params).json()['Table']
 
-    def losers(self,
-               by: Literal['group', 'index', 'all'] = 'group',
-               name: str | None = None,
-               pct_change: Literal['all', '10', '5', '2', '0'] = 'all') -> list[dict]:
+    def losers(
+            self,
+            by: Literal['group', 'index', 'all'] = 'group',
+            name: str | None = None,
+            pct_change: Literal['all', '10', '5', '2',
+                                '0'] = 'all') -> List[dict]:
         '''
         List of top losers
 
@@ -577,7 +574,7 @@ class BSE:
 
     def near52WeekHighLow(self,
                           by: Literal['group', 'index', 'all'] = 'group',
-                          name: str | None = None) -> dict[str, list[dict]]:
+                          name: str | None = None) -> Dict[str, List[dict]]:
         '''
         Get stocks near 52 week highs and lows
 
@@ -645,7 +642,7 @@ class BSE:
 
         return data
 
-    def quote(self, scripcode) -> dict[str, float]:
+    def quote(self, scripcode) -> Dict[str, float]:
         '''
         Get OHLC quotes for given scripcode
 
@@ -688,11 +685,7 @@ class BSE:
         :rtype: dict
         '''
 
-        params = {
-            'Type': 'EQ',
-            'flag': 'C',
-            'scripcode': scripcode
-        }
+        params = {'Type': 'EQ', 'flag': 'C', 'scripcode': scripcode}
 
         th.check()
 
@@ -717,7 +710,7 @@ class BSE:
                        scripcode: str = '',
                        group: str = 'A',
                        segment: str = 'Equity',
-                       status: str = 'Active') -> list[dict]:
+                       status: str = 'Active') -> List[dict]:
         '''
         List all securities and their meta info like symbol code, ISIN code, industry, market cap, segment, group etc.
 

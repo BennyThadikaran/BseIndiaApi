@@ -7,11 +7,9 @@ today = datetime.today().date()
 if len(argv) == 1:
     exit('Pass an stock symbol')
 
-
-with BSE() as bse:
+with BSE('./') as bse:
     code = bse.getScripCode(argv[1])
     data = bse.actions(scripcode=code)
-
 
 for item in data:
     sym = item['short_name']

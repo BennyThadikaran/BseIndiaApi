@@ -41,11 +41,7 @@ def adRatioFormatted(adv, dec):
     return f'{s.ljust(10)}{C.ENDC} {sRatio}'.ljust(11)
 
 
-broad = {
-    '100': '100',
-    'midcap': 'Midcap',
-    'smallcap': 'Smallcap'
-}
+broad = {'100': '100', 'midcap': 'Midcap', 'smallcap': 'Smallcap'}
 
 sector = {
     'auto': 'Auto',
@@ -67,7 +63,7 @@ sector = {
     'utilities': 'Utilities'
 }
 
-with BSE() as bse:
+with BSE('./') as bse:
     data = bse.advanceDecline()
 
 broad_out, sector_out = '', ''

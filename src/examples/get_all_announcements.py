@@ -1,6 +1,5 @@
 from bse import BSE
 import json
-
 '''
 How to use BSE.announcements get all announcements.
 
@@ -15,7 +14,7 @@ ann: list[dict] = []
 total_count = 1000  # arbitary number to suppress pylint warnings
 page_count = 1
 
-with BSE() as bse:
+with BSE('./') as bse:
     while True:
         # Returns Nth page of announcements for the day upto current time.
         res = bse.announcements(page_no=page_count)

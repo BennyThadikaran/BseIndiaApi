@@ -2,7 +2,7 @@
 
 An Unofficial Python Api for BSE India stock exchange.
 
-Python version: >= 3.10
+Python version: >= 3.8
 
 ## Install with PIP
 

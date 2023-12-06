@@ -8,7 +8,7 @@ Welcome to BSE's documentation!
 
 **BSE** is an Unofficial Python Api for BSE India stock exchange
 
-Python version: >= 3.10
+Python version: >= 3.8
 
 All network requests through BSE are rate limited or throttled. This allows making large number of requests without overloading the server or getting blocked.
 
