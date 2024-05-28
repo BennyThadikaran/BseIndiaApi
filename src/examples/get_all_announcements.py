@@ -28,7 +28,7 @@ with BSE('./') as bse:
 
         ann.extend(res['Table'])
 
-        if len(ann) == total_count:
+        if len(ann) >= total_count:
             break
 
         # Next two line are optional and prints percent completion status
