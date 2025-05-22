@@ -1,51 +1,78 @@
 from __future__ import annotations
+
+from datetime import date, datetime, timedelta
+from pathlib import Path
+from re import search
+from typing import Dict, List, Literal, Tuple, Union
+from zipfile import ZipFile
+
+from mthrottle import Throttle
 from requests import Session
 from requests.exceptions import ReadTimeout
-from re import search
-from pathlib import Path
-from zipfile import ZipFile
-from mthrottle import Throttle
-from typing import Literal, Dict, List
-from datetime import datetime
 
 throttle_config = {
-    'lookup': {
-        'rps': 15,
+    "lookup": {
+        "rps": 15,
     },
-    'default': {
-        'rps': 8,
-    }
+    "default": {
+        "rps": 8,
+    },
 }
 
 th = Throttle(throttle_config, 15)
 
 
 class BSE:
-    '''Unofficial Python Api for BSE India
+    """Unofficial Python Api for BSE India
 
     :param download_folder: A folder/dir to save downloaded files and cookie files
     :type download_folder: pathlib.Path or str
     :raise ValueError: if ``download_folder`` is not a folder/dir
-    '''
+    """
 
-    base_url = 'https://www.bseindia.com/'
-    api_url = 'https://api.bseindia.com/BseIndiaAPI/api'
+    base_url = "https://www.bseindia.com/"
+    api_url = "https://api.bseindia.com/BseIndiaAPI/api"
 
-    valid_groups = ('A', 'B', 'E', 'F', 'FC', 'GC', 'I', 'IF', 'IP', 'M', 'MS',
-                    'MT', 'P', 'R', 'T', 'TS', 'W', 'X', 'XD', 'XT', 'Y', 'Z',
-                    'ZP', 'ZY')
+    valid_groups = (
+        "A",
+        "B",
+        "E",
+        "F",
+        "FC",
+        "GC",
+        "I",
+        "IF",
+        "IP",
+        "M",
+        "MS",
+        "MT",
+        "P",
+        "R",
+        "T",
+        "TS",
+        "W",
+        "X",
+        "XD",
+        "XT",
+        "Y",
+        "Z",
+        "ZP",
+        "ZY",
+    )
 
     def __init__(self, download_folder: str | Path):
         self.session = Session()
-        ua = 'Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/118.0'
+        ua = "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/118.0"
 
-        self.session.headers.update({
-            'User-Agent': ua,
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Origin': self.base_url,
-            'Referer': self.base_url,
-        })
+        self.session.headers.update(
+            {
+                "User-Agent": ua,
+                "Accept": "application/json, text/plain, */*",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Origin": self.base_url,
+                "Referer": self.base_url,
+            }
+        )
 
         self.dir = BSE.__getPath(download_folder, isFolder=True)
 
@@ -58,7 +85,7 @@ class BSE:
         return False
 
     def exit(self):
-        '''Close the Request session'''
+        """Close the Request session"""
 
         self.session.close()
 
@@ -72,8 +99,8 @@ class BSE:
         return Path(filepath)
 
     def __download(self, url: str, folder: Path):
-        '''Download a large file in chunks from the given url.
-        Returns pathlib.Path object of the downloaded file'''
+        """Download a large file in chunks from the given url.
+        Returns pathlib.Path object of the downloaded file"""
 
         fname = folder / url.split("/")[-1]
 
@@ -84,13 +111,14 @@ class BSE:
 
                 if r.status_code == 404:
                     raise RuntimeError(
-                        'Report is unavailable or not yet updated.')
+                        "Report is unavailable or not yet updated."
+                    )
 
-                with fname.open(mode='wb') as f:
+                with fname.open(mode="wb") as f:
                     for chunk in r.iter_content(chunk_size=1000000):
                         f.write(chunk)
         except ReadTimeout:
-            raise TimeoutError('Request timed out')
+            raise TimeoutError("Request timed out")
 
         return fname
 
@@ -98,25 +126,25 @@ class BSE:
         try:
             response = self.session.get(url, params=params, timeout=timeout)
         except ReadTimeout:
-            raise TimeoutError('Request timed out')
+            raise TimeoutError("Request timed out")
 
         if not response.ok:
-            raise ConnectionError(f'{response.status_code}: {response.reason}')
+            raise ConnectionError(f"{response.status_code}: {response.reason}")
 
         return response
 
     def __lookup(self, scrip):
-        '''return scripname if scrip is a bse scrip code and vice versa'''
+        """return scripname if scrip is a bse scrip code and vice versa"""
 
-        url = f'{self.api_url}/PeerSmartSearch/w'
+        url = f"{self.api_url}/PeerSmartSearch/w"
 
-        params = {'Type': 'SS', 'text': scrip}
+        params = {"Type": "SS", "text": scrip}
 
-        th.check('lookup')
+        th.check("lookup")
 
         response = self.__req(url, params)
 
-        return response.text.replace('&nbsp;', ' ')
+        return response.text.replace("&nbsp;", " ")
 
     @staticmethod
     def __getPath(path: str | Path, isFolder: bool = False):
@@ -124,7 +152,7 @@ class BSE:
 
         if isFolder:
             if path.is_file():
-                raise ValueError(f'{path}: must be a folder')
+                raise ValueError(f"{path}: must be a folder")
 
             if not path.exists():
                 path.mkdir(parents=True)
@@ -132,7 +160,7 @@ class BSE:
         return path
 
     def bhavcopyReport(self, date: datetime, folder: str | Path | None = None):
-        '''
+        """
         Download the daily bhavcopy report for specified ``date``
 
         :param date: date of report
@@ -147,22 +175,22 @@ class BSE:
         :rtype: pathlib.Path
 
         Zip file is extracted and saved filepath returned.
-        '''
+        """
 
         folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
 
-        url = f'{self.base_url}/download/BhavCopy/Equity/EQ_ISINCODE_{date:%d%m%y}.zip'
+        url = f"{self.base_url}/download/BhavCopy/Equity/EQ_ISINCODE_{date:%d%m%y}.zip"
 
         file = self.__download(url, folder)
 
         if not file.exists():
             file.unlink()
-            raise FileNotFoundError(f'Failed to download file: {file.name}')
+            raise FileNotFoundError(f"Failed to download file: {file.name}")
 
         return BSE.__unzip(file, file.parent)
 
     def deliveryReport(self, date: datetime, folder: str | Path | None = None):
-        '''
+        """
         Download the daily delivery report for specified ``date``
 
         :param date: date of report
@@ -177,33 +205,35 @@ class BSE:
         :rtype: pathlib.Path
 
         Zip file is extracted, converted to CSV, and saved filepath is returned
-        '''
+        """
 
         folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
 
-        url = f'{self.base_url}/BSEDATA/gross/{date:%Y}/SCBSEALL{date:%d%m}.zip'
+        url = f"{self.base_url}/BSEDATA/gross/{date:%Y}/SCBSEALL{date:%d%m}.zip"
 
         file = self.__download(url, folder)
 
         if not file.exists():
             file.unlink()
-            raise FileNotFoundError(f'Failed to download file: {file.name}')
+            raise FileNotFoundError(f"Failed to download file: {file.name}")
 
         file = BSE.__unzip(file, file.parent)
 
-        file.write_bytes(file.read_bytes().replace(b'|', b','))
+        file.write_bytes(file.read_bytes().replace(b"|", b","))
 
-        return file.replace(file.with_suffix('.csv'))
+        return file.replace(file.with_suffix(".csv"))
 
-    def announcements(self,
-                      page_no: int = 1,
-                      from_date: datetime | None = None,
-                      to_date: datetime | None = None,
-                      segment: Literal['equity', 'debt', 'mf_etf'] = 'equity',
-                      scripcode: str | None = None,
-                      category: str = '-1',
-                      subcategory: str = '-1') -> Dict[str, List[dict]]:
-        '''
+    def announcements(
+        self,
+        page_no: int = 1,
+        from_date: datetime | None = None,
+        to_date: datetime | None = None,
+        segment: Literal["equity", "debt", "mf_etf"] = "equity",
+        scripcode: str | None = None,
+        category: str = "-1",
+        subcategory: str = "-1",
+    ) -> Dict[str, List[dict]]:
+        """
         All corporate announcements
 
         :param from_date: (Optional) From date.
@@ -253,10 +283,11 @@ class BSE:
         - **segment**: ``bse.constants.SEGMENT``
 
         - **category**: ``bse.constants.CATEGORY``
-        '''
+        """
 
-        _type = 'C' if segment == 'equity' else (
-            'D' if segment == 'debt' else 'M')
+        _type = (
+            "C" if segment == "equity" else ("D" if segment == "debt" else "M")
+        )
 
         if not from_date:
             from_date = datetime.now()
@@ -267,37 +298,40 @@ class BSE:
         if from_date > to_date:
             raise ValueError("'from_date' cannot be greater than 'to_date'")
 
-        if subcategory != '-1' and category == '-1':
+        if subcategory != "-1" and category == "-1":
             raise ValueError(
-                f"Specify a 'category' for subcategory: {subcategory}")
+                f"Specify a 'category' for subcategory: {subcategory}"
+            )
 
-        url = f'{self.api_url}/AnnSubCategoryGetData/w'
+        url = f"{self.api_url}/AnnSubCategoryGetData/w"
 
-        fmt = '%Y%m%d'
+        fmt = "%Y%m%d"
 
         params = {
-            'pageno': page_no,
-            'strCat': category,
-            'subcategory': subcategory,
-            'strPrevDate': from_date.strftime(fmt),
-            'strToDate': to_date.strftime(fmt),
-            'strSearch': 'P',
-            'strscrip': scripcode,
-            'strType': _type,
+            "pageno": page_no,
+            "strCat": category,
+            "subcategory": subcategory,
+            "strPrevDate": from_date.strftime(fmt),
+            "strToDate": to_date.strftime(fmt),
+            "strSearch": "P",
+            "strscrip": scripcode,
+            "strType": _type,
         }
 
         th.check()
         return self.__req(url, params).json()
 
-    def actions(self,
-                segment: Literal['equity', 'debt', 'mf_etf'] = 'equity',
-                from_date: datetime | None = None,
-                to_date: datetime | None = None,
-                by_date: Literal['ex', 'record', 'bc_start'] = 'ex',
-                scripcode: str | None = None,
-                sector: str = '',
-                purpose_code: str | None = None) -> List[dict]:
-        '''
+    def actions(
+        self,
+        segment: Literal["equity", "debt", "mf_etf"] = "equity",
+        from_date: datetime | None = None,
+        to_date: datetime | None = None,
+        by_date: Literal["ex", "record", "bc_start"] = "ex",
+        scripcode: str | None = None,
+        sector: str = "",
+        purpose_code: str | None = None,
+    ) -> List[dict]:
+        """
         All forthcoming corporate actions
 
         :param segment: Default ``equity``. One of ``equity``, ``debt`` or ``mf_etf``.
@@ -337,45 +371,49 @@ class BSE:
         - **sector**: ``bse.constants.SECTOR``
 
         - **purpose_code**: ``bse.constants.PURPOSE``
-        '''
+        """
 
-        _type = '0' if segment == 'equity' else (
-            '1' if segment == 'debt' else '2')
+        _type = (
+            "0" if segment == "equity" else ("1" if segment == "debt" else "2")
+        )
 
-        by = 'E' if by_date == 'ex' else ('R' if by_date == 'record' else 'B')
+        by = "E" if by_date == "ex" else ("R" if by_date == "record" else "B")
 
         params = {
-            'ddlcategorys': by,
-            'ddlindustrys': sector,
-            'segment': _type,
-            'strSearch': 'D',
+            "ddlcategorys": by,
+            "ddlindustrys": sector,
+            "segment": _type,
+            "strSearch": "D",
         }
 
         if from_date and to_date:
             if from_date > to_date:
-                raise ValueError(
-                    "'from_date' cannot be greater than 'to_date'")
+                raise ValueError("'from_date' cannot be greater than 'to_date'")
 
-            fmt = '%Y%m%d'
+            fmt = "%Y%m%d"
 
-            params.update({
-                'Fdate': from_date.strftime(fmt),
-                'TDate': to_date.strftime(fmt)
-            })
+            params.update(
+                {
+                    "Fdate": from_date.strftime(fmt),
+                    "TDate": to_date.strftime(fmt),
+                }
+            )
 
         if purpose_code:
-            params['Purposecode'] = purpose_code
+            params["Purposecode"] = purpose_code
 
         if scripcode:
-            params['scripcode'] = scripcode
+            params["scripcode"] = scripcode
 
-        return self.__req(f'{self.api_url}/DefaultData/w', params).json()
+        return self.__req(f"{self.api_url}/DefaultData/w", params).json()
 
-    def resultCalendar(self,
-                       from_date: datetime | None = None,
-                       to_date: datetime | None = None,
-                       scripcode: str | None = None) -> List[dict]:
-        '''
+    def resultCalendar(
+        self,
+        from_date: datetime | None = None,
+        to_date: datetime | None = None,
+        scripcode: str | None = None,
+    ) -> List[dict]:
+        """
         Corporate result calendar
 
         :param from_date: (Optional). From date.
@@ -395,54 +433,55 @@ class BSE:
         Provide ``from_date`` and ``to_date`` to filter by date range.
 
         Provide ``scripcode`` to filter by stock.
-        '''
+        """
 
         params = {}
 
         if from_date and to_date:
             if from_date > to_date:
-                raise ValueError(
-                    "'from_date' cannot be greater than 'to_date'")
+                raise ValueError("'from_date' cannot be greater than 'to_date'")
 
-            fmt = '%Y%m%d'
+            fmt = "%Y%m%d"
 
-            params.update({
-                'fromdate': from_date.strftime(fmt),
-                'todate': to_date.strftime(fmt)
-            })
+            params.update(
+                {
+                    "fromdate": from_date.strftime(fmt),
+                    "todate": to_date.strftime(fmt),
+                }
+            )
 
         if scripcode:
-            params['scripcode'] = scripcode
+            params["scripcode"] = scripcode
 
-        url = f'{self.api_url}/Corpforthresults/w'
+        url = f"{self.api_url}/Corpforthresults/w"
 
         return self.__req(url, params=params).json()
 
     def advanceDecline(self) -> List[dict]:
-        '''
+        """
         Advance decline values for all BSE indices
 
         :raise TimeoutError: if request timed out with no response
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Advance decline values. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/advanceDecline.json>`__
         :rtype: list[dict]
-        '''
+        """
 
-        url = f'{self.api_url}/advanceDecline/w'
+        url = f"{self.api_url}/advanceDecline/w"
 
         th.check()
 
-        response = self.__req(url, {'val': 'Index'})
+        response = self.__req(url, {"val": "Index"})
 
         return response.json()
 
     def gainers(
-            self,
-            by: Literal['group', 'index', 'all'] = 'group',
-            name: str | None = None,
-            pct_change: Literal['all', '10', '5', '2',
-                                '0'] = 'all') -> List[dict]:
-        '''
+        self,
+        by: Literal["group", "index", "all"] = "group",
+        name: str | None = None,
+        pct_change: Literal["all", "10", "5", "2", "0"] = "all",
+    ) -> List[dict]:
+        """
         List of top gainers
 
         :param by: Default ``group``. One of ``group``, ``index`` or ``all``.
@@ -477,39 +516,39 @@ class BSE:
         **Available Constants:**
 
         - **name**: ``bse.constants.INDEX``. Only if ``by`` is set to ``index``
-        '''
+        """
 
         params = {
-            'GLtype': 'gainer',
-            'IndxGrp': by,
-            'orderby': pct_change,
+            "GLtype": "gainer",
+            "IndxGrp": by,
+            "orderby": pct_change,
         }
 
-        if by == 'group':
+        if by == "group":
             if name is None:
-                params['IndxGrpval'] = 'A'
+                params["IndxGrpval"] = "A"
             else:
                 if not name.upper() in self.valid_groups:
-                    raise ValueError(f'{name}: Not a valid BSE stock group')
+                    raise ValueError(f"{name}: Not a valid BSE stock group")
 
-                params['IndxGrpval'] = name
-        elif by == 'index':
+                params["IndxGrpval"] = name
+        elif by == "index":
             if name is None:
-                params['IndxGrpval'] = 'S&P BSE SENSEX'
+                params["IndxGrpval"] = "S&P BSE SENSEX"
             else:
-                params['IndxGrpval'] = name.upper()
+                params["IndxGrpval"] = name.upper()
 
-        url = f'{self.api_url}/MktRGainerLoserData/w'
+        url = f"{self.api_url}/MktRGainerLoserData/w"
 
-        return self.__req(url, params=params).json()['Table']
+        return self.__req(url, params=params).json()["Table"]
 
     def losers(
-            self,
-            by: Literal['group', 'index', 'all'] = 'group',
-            name: str | None = None,
-            pct_change: Literal['all', '10', '5', '2',
-                                '0'] = 'all') -> List[dict]:
-        '''
+        self,
+        by: Literal["group", "index", "all"] = "group",
+        name: str | None = None,
+        pct_change: Literal["all", "10", "5", "2", "0"] = "all",
+    ) -> List[dict]:
+        """
         List of top losers
 
         :param by: Default ``group``. One of ``group``, ``index`` or ``all``.
@@ -544,38 +583,40 @@ class BSE:
         **Available Constants:**
 
         - **name**: ``bse.constants.INDEX``. Only if ``by`` is set to ``index``
-        '''
+        """
 
         params = {
-            'GLtype': 'loser',
-            'IndxGrp': by,
-            'IndxGrpval': name,
-            'orderby': pct_change,
+            "GLtype": "loser",
+            "IndxGrp": by,
+            "IndxGrpval": name,
+            "orderby": pct_change,
         }
 
-        if by == 'group':
+        if by == "group":
             if name is None:
-                params['IndxGrpval'] = 'A'
+                params["IndxGrpval"] = "A"
             else:
                 if not name.upper() in self.valid_groups:
-                    raise ValueError(f'{name}: Not a valid BSE group')
+                    raise ValueError(f"{name}: Not a valid BSE group")
 
-                params['IndxGrpval'] = name
+                params["IndxGrpval"] = name
 
-        if by == 'index':
+        if by == "index":
             if name is None:
-                params['IndxGrpval'] = 'S&P BSE SENSEX'
+                params["IndxGrpval"] = "S&P BSE SENSEX"
             else:
-                params['IndxGrpval'] = name.upper()
+                params["IndxGrpval"] = name.upper()
 
-        url = f'{self.api_url}/MktRGainerLoserData/w'
+        url = f"{self.api_url}/MktRGainerLoserData/w"
 
-        return self.__req(url, params=params).json()['Table']
+        return self.__req(url, params=params).json()["Table"]
 
-    def near52WeekHighLow(self,
-                          by: Literal['group', 'index', 'all'] = 'group',
-                          name: str | None = None) -> Dict[str, List[dict]]:
-        '''
+    def near52WeekHighLow(
+        self,
+        by: Literal["group", "index", "all"] = "group",
+        name: str | None = None,
+    ) -> Dict[str, List[dict]]:
+        """
         Get stocks near 52 week highs and lows
 
         :param by: Default ``group``. One of ``group``, ``index`` or ``all``.
@@ -603,30 +644,30 @@ class BSE:
         **Available Constants:**
 
         - **name**: ``bse.constants.INDEX``. Only if ``by`` is set to ``index``
-        '''
+        """
 
-        url = f'{self.api_url}/MktHighLowData/w'
+        url = f"{self.api_url}/MktHighLowData/w"
 
         params = {
-            'HLflag': 'H',
-            'Grpcode': '',
-            'indexcode': '',
-            'scripcode': ''
+            "HLflag": "H",
+            "Grpcode": "",
+            "indexcode": "",
+            "scripcode": "",
         }
 
-        if by == 'group':
+        if by == "group":
             if name is None:
-                params['Grpcode'] = 'A'
+                params["Grpcode"] = "A"
             else:
                 if not name.upper() in self.valid_groups:
-                    raise ValueError(f'{name}: Not a valid BSE stock group')
+                    raise ValueError(f"{name}: Not a valid BSE stock group")
 
-                params['Grpcode'] = name
-        elif by == 'index':
+                params["Grpcode"] = name
+        elif by == "index":
             if name is None:
-                params['indexcode'] = 'S&P BSE SENSEX'
+                params["indexcode"] = "S&P BSE SENSEX"
             else:
-                params['indexcode'] = name
+                params["indexcode"] = name
 
         th.check()
 
@@ -634,16 +675,16 @@ class BSE:
 
         data = response.json()
 
-        if 'Table' in data:
-            data['highs'] = data.pop('Table')
+        if "Table" in data:
+            data["highs"] = data.pop("Table")
 
-        if 'Table1' in data:
-            data['lows'] = data.pop('Table1')
+        if "Table1" in data:
+            data["lows"] = data.pop("Table1")
 
         return data
 
     def quote(self, scripcode) -> Dict[str, float]:
-        '''
+        """
         Get OHLC quotes for given scripcode
 
         :param scripcode: BSE scrip code
@@ -652,19 +693,19 @@ class BSE:
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: OHLC data for given scripcode. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quote.json>`__
         :rtype: dict[str, float]
-        '''
+        """
 
-        url = f'{self.api_url}/getScripHeaderData/w'
+        url = f"{self.api_url}/getScripHeaderData/w"
 
         params = {
-            'scripcode': scripcode,
+            "scripcode": scripcode,
         }
 
         th.check()
 
-        response = self.__req(url, params).json()['Header']
+        response = self.__req(url, params).json()["Header"]
 
-        fields = ('PrevClose', 'Open', 'High', 'Low', 'LTP')
+        fields = ("PrevClose", "Open", "High", "Low", "LTP")
 
         data = {}
 
@@ -674,7 +715,7 @@ class BSE:
         return data
 
     def quoteWeeklyHL(self, scripcode) -> dict:
-        '''
+        """
         Get 52 week and monthly high & low data for given stock.
 
         :param scripcode: BSE scrip code
@@ -683,35 +724,37 @@ class BSE:
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Weekly and monthly high and lows with dates. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/quoteWeeklyHL.json>`__
         :rtype: dict
-        '''
+        """
 
-        params = {'Type': 'EQ', 'flag': 'C', 'scripcode': scripcode}
+        params = {"Type": "EQ", "flag": "C", "scripcode": scripcode}
 
         th.check()
 
-        data = self.__req(f'{self.api_url}/HighLow/w', params=params).json()
+        data = self.__req(f"{self.api_url}/HighLow/w", params=params).json()
 
-        wHigh, wLow = data['WeekHighLow'].split(' / ')
-        mHigh, mLow = data['MonthHighLow'].split(' / ')
+        wHigh, wLow = data["WeekHighLow"].split(" / ")
+        mHigh, mLow = data["MonthHighLow"].split(" / ")
 
         return {
-            'fifty2WeekHigh': float(data['Fifty2WkHigh_adj']),
-            'dateHigh': data['Fifty2WkHigh_adjDt'].strip(' ()'),
-            'fifty2WeekLow': float(data['Fifty2WkLow_adj']),
-            'dateLow': data['Fifty2WkLow_adjDt'].strip(' ()'),
-            'monthlyHigh': float(mHigh),
-            'monthlyLow': float(mLow),
-            'weeklyHigh': float(wHigh),
-            'weeklyLow': float(wLow)
+            "fifty2WeekHigh": float(data["Fifty2WkHigh_adj"]),
+            "dateHigh": data["Fifty2WkHigh_adjDt"].strip(" ()"),
+            "fifty2WeekLow": float(data["Fifty2WkLow_adj"]),
+            "dateLow": data["Fifty2WkLow_adjDt"].strip(" ()"),
+            "monthlyHigh": float(mHigh),
+            "monthlyLow": float(mLow),
+            "weeklyHigh": float(wHigh),
+            "weeklyLow": float(wLow),
         }
 
-    def listSecurities(self,
-                       industry: str = '',
-                       scripcode: str = '',
-                       group: str = 'A',
-                       segment: str = 'Equity',
-                       status: str = 'Active') -> List[dict]:
-        '''
+    def listSecurities(
+        self,
+        industry: str = "",
+        scripcode: str = "",
+        group: str = "A",
+        segment: str = "Equity",
+        status: str = "Active",
+    ) -> List[dict]:
+        """
         List all securities and their meta info like symbol code, ISIN code, industry, market cap, segment, group etc.
 
         :param industry: (Optional) Filter by industry name
@@ -737,25 +780,25 @@ class BSE:
         - **segment**: ``bse.constants.SEGMENT``
 
         - **status**: ``bse.constants.STATUS``
-        '''
+        """
 
-        url = f'{self.api_url}/ListofScripData/w'
+        url = f"{self.api_url}/ListofScripData/w"
 
         params = {
-            'scripcode': scripcode,
-            'Group': group,
-            'industry': industry,
-            'segment': segment,
-            'status': status,
+            "scripcode": scripcode,
+            "Group": group,
+            "industry": industry,
+            "segment": segment,
+            "status": status,
         }
 
         if group:
             group = group.upper()
 
             if not group.upper() in self.valid_groups:
-                raise ValueError('{group} not a valid BSE stock group')
+                raise ValueError("{group} not a valid BSE stock group")
 
-            params['Group'] = group
+            params["Group"] = group
 
         th.check()
 
@@ -764,7 +807,7 @@ class BSE:
         return response.json()
 
     def getScripName(self, scripcode) -> str:
-        '''
+        """
         Get stock symbol name for BSE scrip code
 
         :param scripcode: BSE scrip code
@@ -776,10 +819,10 @@ class BSE:
 
         Example
         500180 -> 'HDFCBANK'
-        '''
+        """
 
         # <span>HDFC   INE001A01036<strong>500010
-        regex = rf'<\w+>([A-Z0-9]+)\s+\w+\s+<\w+>{scripcode}'
+        regex = rf"<\w+>([A-Z0-9]+)\s+\w+\s+<\w+>{scripcode}"
 
         response = self.__lookup(scripcode)
         match = search(regex, response)
@@ -787,10 +830,10 @@ class BSE:
         if match:
             return match.group(1)
 
-        raise ValueError(f'Could not find scrip name for {scripcode}')
+        raise ValueError(f"Could not find scrip name for {scripcode}")
 
     def getScripCode(self, scripname):
-        '''
+        """
         Get BSE scrip code for stock symbol name
 
         :param scripname: Stock symbol code
@@ -802,9 +845,9 @@ class BSE:
 
         Example
         HDFCBANK -> '500180'
-        '''
+        """
         # <strong>HDFC</strong>   INE001A01036   500010
-        regex = rf'<\w+>{scripname.upper()}<\/\w+>\s+\w+\s+(\d{{6}})'
+        regex = rf"<\w+>{scripname.upper()}<\/\w+>\s+\w+\s+(\d{{6}})"
 
         response = self.__lookup(scripname)
         match = search(regex, response)
