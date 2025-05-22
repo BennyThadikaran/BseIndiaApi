@@ -812,4 +812,154 @@ class BSE:
         if match:
             return match.group(1)
 
-        raise ValueError(f'Could not find scrip code for {scripname}')
+        raise ValueError(f"Could not find scrip code for {scripname}")
+
+    def fetchHistoricalIndexData(
+        self,
+        from_date: date,
+        to_date: date,
+        index: str = "All",
+        period: Literal["D", "M", "Y"] = "D",
+    ) -> Union[Dict[str, List[Dict]], List[Dict]]:
+        """
+        Fetch historical index data for a given date range and index.
+
+        If `index` is "All":
+
+        - Returns the data for all indexes for a single day as specified in `from_date`.
+          `to_date` is ignored.
+
+        For any other `index` parameter, the data for the entire date range is
+        returned as a list of dictionaries
+
+        For a list of valid index names, use :meth:`.fetchIndexNames`.
+
+        :param from_date: The starting date of the range.
+        :type from_date: datetime.date
+        :param to_date: The ending date of the range.
+        :type to_date: datetime.date
+        :param index: The index to retrieve data for. Defaults to "All".
+        :type index: str
+        :param period: Aggregation period.
+                       "D" for daily, "M" for monthly, "Y" for yearly. Defaults to "D".
+        :type period: Literal["D", "M", "Y"]
+
+        :return: If `index` is "All", returns a dictionary with `Table` key
+         with value being a list of dictionaries for each index.
+         Otherwise, returns a list of dictionaries for the entire date range of the specified index.
+        :rtype: Union[Dict[str, List[Dict]], List[Dict]]
+        :raises ValueError: if `from_date` is greater than `to_date`
+        """
+        if index == "All":
+            to_date = from_date
+
+            params = dict(
+                fmdt=from_date.strftime("%d/%m/%Y"),
+                todt=to_date.strftime("%d/%m/%Y"),
+                index=index,
+                period=period,
+            )
+
+            th.check()
+
+            return self.__req(
+                f"{self.api_url}/IndexArchDailyAll/w", params=params
+            ).json()
+
+        if to_date < from_date:
+            raise ValueError("`to_date` must be greater than `from_date`")
+
+        date_chunks = self.split_date_range(from_date, to_date)
+        data = []
+
+        for chunk in date_chunks:
+            params = dict(
+                fmdt=chunk[0].strftime("%d/%m/%Y"),
+                todt=chunk[1].strftime("%d/%m/%Y"),
+                index=index,
+                period=period,
+            )
+
+            th.check()
+
+            response = self.__req(
+                f"{self.api_url}/IndexArchDaily/w", params=params
+            ).json()
+
+            if "Table" in response:
+                data += response["Table"]
+            else:
+                continue
+
+        return data
+
+    def fetchIndexNames(self) -> Dict[str, List[Dict]]:
+        """
+        Fetch the list of Indices to be used in conjunction with :meth:`.fetchHistoricalIndexData`.
+
+        Reference: https://www.bseindia.com/indices/IndexArchiveData.html
+        """
+
+        url = f"{self.api_url}/FillddlIndex/w?fmdt=&todt="
+
+        th.check()
+
+        response = self.__req(url)
+
+        return response.json()
+
+    def fetchIndexReportMetadata(self) -> Dict[str, List[Dict]]:
+        """
+        Returns a dictionary with a `Table` key containing a list of dict.
+
+        The dictionary contains metadata about AllIndices report along with the last updated date.
+
+        Useful to check if the Index data for the latest trading session has been updated.
+
+        Used in conjunction with :meth:`.fetchHistoricalIndexData`
+
+        Reference: https://www.bseindia.com/indices/IndexArchiveData.html
+        """
+        th.check()
+
+        return self.__req(f"{self.api_url}/Indexarchive_filedownload/w").json()
+
+    @staticmethod
+    def split_date_range(
+        from_date: date, to_date: date, max_chunk_size: int = 30
+    ) -> List[Tuple[date, date]]:
+        """
+        Splits a date range into non-overlapping chunks with each chunk having size at specified by
+        the max_chunk_size parameter
+
+        :contributor: @ButteryPaws
+
+        :param from_date: The starting date of the range
+        :type from_date: datetime.date
+        :param to_date: The ending date of the range
+        :type to_date: datetime.date
+        :param max_chunk_size: The max size of each chunk into which the range is split
+        :type max_chunk_size: int
+        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :return: A sorted list of tuples. Each element of the list is a range (`start_date`, `end_date`)
+        :rtype: List[Tuple[datetime.date, datetime.date]]
+        """
+
+        chunks = []
+        current_start = from_date
+
+        while current_start <= to_date:
+            # Calculate the end of the current chunk.
+            # We use max_size - 1 because the range is inclusive.
+            current_end = current_start + timedelta(days=max_chunk_size - 1)
+
+            # Don't go past the final date.
+            if current_end > to_date:
+                current_end = to_date
+
+            chunks.append((current_start, current_end))
+
+            # Start next chunk the day after the current end.
+            current_start = current_end + timedelta(days=1)
+
+        return chunks
