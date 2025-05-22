@@ -5,9 +5,9 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constants" href="Constants.html" /><link rel="prev" title="Welcome to BSE’s documentation!" href="index.html" />
 
-    <!-- Generated with Sphinx 7.3.7 and Furo 2023.09.10 -->
-        <title>Usage - bse 2.0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <!-- Generated with Sphinx 7.4.7 and Furo 2023.09.10 -->
+        <title>Usage - bse 2.0.2-1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
     
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">bse 2.0.1 documentation</div></a>
+      <a href="index.html"><div class="brand">bse 2.0.2-1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">bse 2.0.1 documentation</span>
+  <span class="sidebar-brand-text">bse 2.0.2-1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -202,7 +202,7 @@
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bse</span> <span class="kn">import</span> <span class="n">BSE</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bse</span><span class="w"> </span><span class="kn">import</span> <span class="n">BSE</span>
 
 <span class="n">bse</span> <span class="o">=</span> <span class="n">BSE</span><span class="p">()</span>
 
@@ -702,6 +702,59 @@ stocks are filtered by range of percent change.</p>
 </ul>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.fetchHistoricalIndexData">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">fetchHistoricalIndexData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'All'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'D'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'M'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Y'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'D'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bse.BSE.fetchHistoricalIndexData" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch historical index data for a given date range and index.</p>
+<p>If <cite>index</cite> is “All”:</p>
+<ul class="simple">
+<li><p>Returns the data for all indexes for a single day as specified in <cite>from_date</cite>.
+<cite>to_date</cite> is ignored.</p></li>
+</ul>
+<p>For any other <cite>index</cite> parameter, the data for the entire date range is
+returned as a list of dictionaries</p>
+<p>For a list of valid index names, use <a class="reference internal" href="#bse.BSE.fetchIndexNames" title="bse.BSE.fetchIndexNames"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchIndexNames()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_date</strong> (<em>datetime.date</em>) – The starting date of the range.</p></li>
+<li><p><strong>to_date</strong> (<em>datetime.date</em>) – The ending date of the range.</p></li>
+<li><p><strong>index</strong> (<em>str</em>) – The index to retrieve data for. Defaults to “All”.</p></li>
+<li><p><strong>period</strong> (<em>Literal</em><em>[</em><em>&quot;D&quot;</em><em>, </em><em>&quot;M&quot;</em><em>, </em><em>&quot;Y&quot;</em><em>]</em>) – Aggregation period.
+“D” for daily, “M” for monthly, “Y” for yearly. Defaults to “D”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If <cite>index</cite> is “All”, returns a dictionary with <cite>Table</cite> key
+with value being a list of dictionaries for each index.
+Otherwise, returns a list of dictionaries for the entire date range of the specified index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[Dict[str, List[Dict]], List[Dict]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if <cite>from_date</cite> is greater than <cite>to_date</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.fetchIndexNames">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">fetchIndexNames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bse.BSE.fetchIndexNames" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the list of Indices to be used in conjunction with <a class="reference internal" href="#bse.BSE.fetchHistoricalIndexData" title="bse.BSE.fetchHistoricalIndexData"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchHistoricalIndexData()</span></code></a>.</p>
+<p>Reference: <a class="reference external" href="https://www.bseindia.com/indices/IndexArchiveData.html">https://www.bseindia.com/indices/IndexArchiveData.html</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.fetchIndexReportMetadata">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">fetchIndexReportMetadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#bse.BSE.fetchIndexReportMetadata" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with a <cite>Table</cite> key containing a list of dict.</p>
+<p>The dictionary contains metadata about AllIndices report along with the last updated date.</p>
+<p>Useful to check if the Index data for the latest trading session has been updated.</p>
+<p>Used in conjunction with <a class="reference internal" href="#bse.BSE.fetchHistoricalIndexData" title="bse.BSE.fetchHistoricalIndexData"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchHistoricalIndexData()</span></code></a></p>
+<p>Reference: <a class="reference external" href="https://www.bseindia.com/indices/IndexArchiveData.html">https://www.bseindia.com/indices/IndexArchiveData.html</a></p>
+</dd></dl>
+
 </section>
 </section>
 
@@ -793,6 +846,9 @@ stocks are filtered by range of percent change.</p>
 <li><a class="reference internal" href="#bse.BSE.quote"><code class="docutils literal notranslate"><span class="pre">BSE.quote()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.quoteWeeklyHL"><code class="docutils literal notranslate"><span class="pre">BSE.quoteWeeklyHL()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.listSecurities"><code class="docutils literal notranslate"><span class="pre">BSE.listSecurities()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.fetchHistoricalIndexData"><code class="docutils literal notranslate"><span class="pre">BSE.fetchHistoricalIndexData()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.fetchIndexNames"><code class="docutils literal notranslate"><span class="pre">BSE.fetchIndexNames()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.fetchIndexReportMetadata"><code class="docutils literal notranslate"><span class="pre">BSE.fetchIndexReportMetadata()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -806,7 +862,7 @@ stocks are filtered by range of percent change.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=f5cff4aa"></script>
+</div><script src="_static/documentation_options.js?v=f0f594b5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>

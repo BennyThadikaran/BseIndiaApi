@@ -71,3 +71,9 @@ Market Updates and Summary
 .. automethod:: bse.BSE.quoteWeeklyHL
 
 .. automethod:: bse.BSE.listSecurities
+
+.. automethod:: bse.BSE.fetchHistoricalIndexData
+
+.. automethod:: bse.BSE.fetchIndexNames
+
+.. automethod:: bse.BSE.fetchIndexReportMetadata
