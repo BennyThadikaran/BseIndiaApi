@@ -64,7 +64,7 @@ class BSE:
 
     def __init__(self, download_folder: str | Path):
         self.session = Session()
-        ua = "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/118.0"
+        ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"
 
         self.session.headers.update(
             {
@@ -73,6 +73,7 @@ class BSE:
                 "Accept-Language": "en-US,en;q=0.5",
                 "Origin": self.base_url,
                 "Referer": self.base_url,
+                "Connection": "keep-alive",
             }
         )
 
