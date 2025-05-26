@@ -867,84 +867,84 @@ class BSE:
 
         raise ValueError(f"Could not find scrip code for {scripname}")
 
+    def fetchAllIndicesDataByDate(self, dt: date) -> Dict[str, List[Dict]]:
+        """
+        Fetch daily data for all indices for a given date.
+
+        To download historical index data for a specific index by date range,
+        see meth:`.fetchHistoricalIndexData`
+
+        :param dt: The date for which to fetch index data.
+        :type dt: datetime.date
+        :returns: A dictionary where each key is an index name,
+         and each value is a list of dictionaries containing index data.
+        :rtype: Dict[str, List[Dict]]
+        """
+        th.check()
+        dt_str = dt.strftime("%d/%m/%Y")
+
+        return self.__req(
+            f"{self.api_url}/IndexArchDailyAll/w",
+            params=dict(
+                fmdt=dt_str,
+                todt=dt_str,
+                index="All",
+                period="D",
+            ),
+        ).json()
+
     def fetchHistoricalIndexData(
         self,
+        index: str,
         from_date: date,
         to_date: date,
-        index: str = "All",
         period: Literal["D", "M", "Y"] = "D",
-    ) -> Union[Dict[str, List[Dict]], List[Dict]]:
+        folder: str | Path | None = None,
+    ) -> Path:
         """
-        Fetch historical index data for a given date range and index.
+        Download historical data for the specified index for the given date range.
 
-        If `index` is "All":
-
-        - Returns the data for all indexes for a single day as specified in `from_date`.
-          `to_date` is ignored.
-
-        For any other `index` parameter, the data for the entire date range is
-        returned as a list of dictionaries
+        The data for the entire date range is downloaded as a CSV file and the filepath is returned.
 
         For a list of valid index names, use :meth:`.fetchIndexNames`.
+
+        To download all index data for the data see :meth:`.fetchAllIndicesDataByDate`
 
         :param from_date: The starting date of the range.
         :type from_date: datetime.date
         :param to_date: The ending date of the range.
         :type to_date: datetime.date
-        :param index: The index to retrieve data for. Defaults to "All".
+        :param index: The index to retrieve data for.
         :type index: str
         :param period: Aggregation period.
                        "D" for daily, "M" for monthly, "Y" for yearly. Defaults to "D".
         :type period: Literal["D", "M", "Y"]
+        :param folder: Optional dir/folder to save the file to
+        :type folder: str or pathlib.Path or None
 
-        :return: If `index` is "All", returns a dictionary with `Table` key
-         with value being a list of dictionaries for each index.
-         Otherwise, returns a list of dictionaries for the entire date range of the specified index.
-        :rtype: Union[Dict[str, List[Dict]], List[Dict]]
+        :return: Filepath of the downloaded file.
+        :rtype: pathlib.Path
         :raises ValueError: if `from_date` is greater than `to_date`
         """
-        if index == "All":
-            to_date = from_date
-
-            params = dict(
-                fmdt=from_date.strftime("%d/%m/%Y"),
-                todt=to_date.strftime("%d/%m/%Y"),
-                index=index,
-                period=period,
-            )
-
-            th.check()
-
-            return self.__req(
-                f"{self.api_url}/IndexArchDailyAll/w", params=params
-            ).json()
-
         if to_date < from_date:
             raise ValueError("`to_date` must be greater than `from_date`")
 
-        date_chunks = self.split_date_range(from_date, to_date)
-        data = []
+        th.check()
 
-        for chunk in date_chunks:
-            params = dict(
-                fmdt=chunk[0].strftime("%d/%m/%Y"),
-                todt=chunk[1].strftime("%d/%m/%Y"),
-                index=index,
+        folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
+        fname = f"{index}_{from_date:%d%m%Y}_{to_date:%d%m%Y}.csv"
+
+        return self.__download(
+            f"{self.api_url}/ProduceCSVForDate/w",
+            params=dict(
+                strIndex=index,
+                dtFromDate=from_date.strftime("%d/%m/%Y"),
+                dtToDate=to_date.strftime("%d/%m/%Y"),
                 period=period,
-            )
-
-            th.check()
-
-            response = self.__req(
-                f"{self.api_url}/IndexArchDaily/w", params=params
-            ).json()
-
-            if "Table" in response:
-                data += response["Table"]
-            else:
-                continue
-
-        return data
+            ),
+            fname=fname,
+            folder=folder,
+        )
 
     def fetchIndexNames(self) -> Dict[str, List[Dict]]:
         """
