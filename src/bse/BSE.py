@@ -900,11 +900,13 @@ class BSE:
         to_date: date,
         period: Literal["D", "M", "Y"] = "D",
         folder: str | Path | None = None,
-    ) -> Path:
+    ) -> Optional[Path]:
         """
         Download historical data for the specified index for the given date range.
 
         The data for the entire date range is downloaded as a CSV file and the filepath is returned.
+
+        If the file is empty, None is returned.
 
         For a list of valid index names, use :meth:`.fetchIndexNames`.
 
@@ -922,8 +924,8 @@ class BSE:
         :param folder: Optional dir/folder to save the file to
         :type folder: str or pathlib.Path or None
 
-        :return: Filepath of the downloaded file.
-        :rtype: pathlib.Path
+        :return: None if file is empty else filepath of the downloaded file.
+        :rtype: Optional[pathlib.Path]
         :raises ValueError: if `from_date` is greater than `to_date`
         """
         if to_date < from_date:
@@ -934,7 +936,7 @@ class BSE:
         folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
         fname = f"{index}_{from_date:%d%m%Y}_{to_date:%d%m%Y}.csv"
 
-        return self.__download(
+        fpath = self.__download(
             f"{self.api_url}/ProduceCSVForDate/w",
             params=dict(
                 strIndex=index,
@@ -945,6 +947,11 @@ class BSE:
             fname=fname,
             folder=folder,
         )
+
+        if fpath.stat().st_size:
+            return fpath
+        else:
+            fpath.unlink()
 
     def fetchIndexNames(self) -> Dict[str, List[Dict]]:
         """
