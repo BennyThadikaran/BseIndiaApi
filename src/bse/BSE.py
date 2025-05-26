@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from re import search
-from typing import Dict, List, Literal, Tuple, Union
+from typing import Dict, List, Literal, Optional, Tuple, Union
 from zipfile import ZipFile
 
 from mthrottle import Throttle
@@ -101,16 +101,23 @@ class BSE:
 
         return Path(filepath)
 
-    def __download(self, url: str, folder: Path):
+    def __download(
+        self, url: str, folder: Path, params: Optional[dict] = None, fname=None
+    ):
         """Download a large file in chunks from the given url.
         Returns pathlib.Path object of the downloaded file"""
 
-        fname = folder / url.split("/")[-1]
+        if fname:
+            fname = folder / fname
+        else:
+            fname = folder / url.split("/")[-1]
 
         th.check()
 
         try:
-            with self.session.get(url, stream=True, timeout=10) as r:
+            with self.session.get(
+                url, stream=True, timeout=10, params=params
+            ) as r:
 
                 if r.status_code == 404:
                     raise RuntimeError(
