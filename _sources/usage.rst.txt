@@ -48,6 +48,8 @@ Download Reports
 
 .. automethod:: bse.BSE.deliveryReport
 
+.. automethod:: bse.BSE.fetchHistoricalIndexData
+
 Corporate Filings
 -----------------
 
@@ -72,7 +74,7 @@ Market Updates and Summary
 
 .. automethod:: bse.BSE.listSecurities
 
-.. automethod:: bse.BSE.fetchHistoricalIndexData
+.. automethod:: bse.BSE.fetchAllIndicesDataByDate
 
 .. automethod:: bse.BSE.fetchIndexNames
 
