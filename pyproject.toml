@@ -32,6 +32,10 @@ classifiers = [
 ]
 dependencies = [ "mthrottle>=0.0.1", "requests>=2.31" ]
 
+optional-dependencies.dev = [
+  "furo==2023.9.10",
+  "sphinx==7.4.7",
+]
 urls."Bug Tracker" = "https://github.com/BennyThadikaran/BseIndiaApi/issues"
 urls."Homepage" = "https://github.com/BennyThadikaran/BseIndiaApi"
 
