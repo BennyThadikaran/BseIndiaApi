@@ -178,13 +178,10 @@ class BSE:
         :raise TimeoutError: if request timed out with no response
         :return: file path of downloaded report
         :rtype: pathlib.Path
-
-        Zip file is extracted and saved filepath returned.
         """
 
         folder = BSE.__getPath(folder, isFolder=True) if folder else self.dir
-
-        url = f"{self.base_url}/download/BhavCopy/Equity/EQ_ISINCODE_{date:%d%m%y}.zip"
+        url = f"{self.base_url}/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_{date:%Y%m%d}_F_0000.CSV"
 
         file = self.__download(url, folder)
 
@@ -192,7 +189,7 @@ class BSE:
             file.unlink()
             raise FileNotFoundError(f"Failed to download file: {file.name}")
 
-        return BSE.__unzip(file, file.parent)
+        return file
 
     def deliveryReport(self, date: datetime, folder: str | Path | None = None):
         """
