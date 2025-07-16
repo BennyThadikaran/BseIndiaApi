@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from re import search
-from typing import Dict, List, Literal, Optional, Tuple, Union
+from typing import Dict, List, Literal, Optional, Tuple
 from zipfile import ZipFile
 
 from mthrottle import Throttle
@@ -115,14 +115,9 @@ class BSE:
         th.check()
 
         try:
-            with self.session.get(
-                url, stream=True, timeout=10, params=params
-            ) as r:
-
+            with self.session.get(url, stream=True, timeout=10, params=params) as r:
                 if r.status_code == 404:
-                    raise RuntimeError(
-                        "Report is unavailable or not yet updated."
-                    )
+                    raise RuntimeError("Report is unavailable or not yet updated.")
 
                 with fname.open(mode="wb") as f:
                     for chunk in r.iter_content(chunk_size=1000000):
@@ -295,9 +290,7 @@ class BSE:
         - **category**: ``bse.constants.CATEGORY``
         """
 
-        _type = (
-            "C" if segment == "equity" else ("D" if segment == "debt" else "M")
-        )
+        _type = "C" if segment == "equity" else ("D" if segment == "debt" else "M")
 
         if not from_date:
             from_date = datetime.now()
@@ -309,9 +302,7 @@ class BSE:
             raise ValueError("'from_date' cannot be greater than 'to_date'")
 
         if subcategory != "-1" and category == "-1":
-            raise ValueError(
-                f"Specify a 'category' for subcategory: {subcategory}"
-            )
+            raise ValueError(f"Specify a 'category' for subcategory: {subcategory}")
 
         url = f"{self.api_url}/AnnSubCategoryGetData/w"
 
@@ -383,9 +374,7 @@ class BSE:
         - **purpose_code**: ``bse.constants.PURPOSE``
         """
 
-        _type = (
-            "0" if segment == "equity" else ("1" if segment == "debt" else "2")
-        )
+        _type = "0" if segment == "equity" else ("1" if segment == "debt" else "2")
 
         by = "E" if by_date == "ex" else ("R" if by_date == "record" else "B")
 
@@ -538,7 +527,7 @@ class BSE:
             if name is None:
                 params["IndxGrpval"] = "A"
             else:
-                if not name.upper() in self.valid_groups:
+                if name.upper() not in self.valid_groups:
                     raise ValueError(f"{name}: Not a valid BSE stock group")
 
                 params["IndxGrpval"] = name
@@ -606,7 +595,7 @@ class BSE:
             if name is None:
                 params["IndxGrpval"] = "A"
             else:
-                if not name.upper() in self.valid_groups:
+                if name.upper() not in self.valid_groups:
                     raise ValueError(f"{name}: Not a valid BSE group")
 
                 params["IndxGrpval"] = name
@@ -669,7 +658,7 @@ class BSE:
             if name is None:
                 params["Grpcode"] = "A"
             else:
-                if not name.upper() in self.valid_groups:
+                if name.upper() not in self.valid_groups:
                     raise ValueError(f"{name}: Not a valid BSE stock group")
 
                 params["Grpcode"] = name
@@ -805,7 +794,7 @@ class BSE:
         if group:
             group = group.upper()
 
-            if not group.upper() in self.valid_groups:
+            if group.upper() not in self.valid_groups:
                 raise ValueError("{group} not a valid BSE stock group")
 
             params["Group"] = group
