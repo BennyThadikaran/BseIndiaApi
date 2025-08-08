@@ -1,1 +1,1 @@
-from bse import BSE
+from bse import BSE, SymbolParser

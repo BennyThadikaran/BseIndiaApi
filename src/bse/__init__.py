@@ -1,2 +1,2 @@
-from .BSE import BSE
+from .BSE import BSE, SymbolParser
 from .constants import *
