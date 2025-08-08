@@ -32,7 +32,7 @@ class BSE:
     :raise ValueError: if ``download_folder`` is not a folder/dir
     """
 
-    version = "3.0.2"
+    version = "3.1.0"
 
     base_url = "https://www.bseindia.com/"
     api_url = "https://api.bseindia.com/BseIndiaAPI/api"
