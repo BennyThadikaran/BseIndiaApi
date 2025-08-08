@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
+
+from html.parser import HTMLParser
 from pathlib import Path
 from re import search
 from typing import Dict, List, Literal, Optional, Tuple
@@ -78,6 +80,7 @@ class BSE:
         )
 
         self.dir = BSE.__getPath(download_folder, isFolder=True)
+        self.symbol_parser = SymbolParser()
 
     def __enter__(self):
         return self
@@ -802,6 +805,28 @@ class BSE:
 
         return response.json()
 
+    def lookup(self, text: str) -> Optional[dict]:
+        """
+        .. versionadded:: 3.1.0
+
+        Search by Company name, stock symbol, ISIN or BSE code.
+
+        :param text: A string representing the Company name, Stock symbol, ISIN code or BSE code.
+        :type text: str
+        :return: None if lookup failed else a dictionary containing company_name,
+         symbol, isin and bse_code. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/lookup.json>`__
+        :rtype: Optional[dict]
+        """
+        response = self.__lookup(text)
+        self.symbol_parser.feed(response)
+        result = self.symbol_parser.result.copy()
+        self.symbol_parser.reset_data()
+
+        if "symbol" not in result:
+            return None
+
+        return None if "symbol" not in result else result
+
     def getScripName(self, scripcode) -> str:
         """
         Get stock symbol name for BSE scrip code
@@ -1009,3 +1034,50 @@ class BSE:
             current_start = current_end + timedelta(days=1)
 
         return chunks
+
+
+class SymbolParser(HTMLParser):
+    """
+    HTML parser to parse html strings returned from BSE symbol search
+
+    The result in parsed into a dictionary with company_name, symbol, isin and bse_code
+    """
+
+    def __init__(self):
+        super().__init__()
+
+        self.result = {}
+        self.start = False
+
+        # The fields within the HTML are always in the same order
+        self.fields = ("company_name", "symbol", "isin", "bse_code")
+        self.index = 0
+
+    def reset_data(self):
+        self.result.clear()
+        self.start = False
+        self.index = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            self.start = True
+
+    def handle_endtag(self, tag):
+        if tag == "a":
+            self.start = False
+
+    def handle_data(self, data):
+        if not self.start:
+            return
+
+        field = self.fields[self.index]
+
+        if field not in self.result:
+            if "company_name" in self.result and " " in data:
+                # Handle strings like `   INE040A01034   500180`
+                for item in data.split(" "):
+                    if item != "":
+                        self.handle_data(item)
+                return
+            self.result[field] = data.strip()
+            self.index += 1
