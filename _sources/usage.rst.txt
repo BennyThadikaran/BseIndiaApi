@@ -38,6 +38,8 @@ General Methods
 
 .. automethod:: bse.BSE.exit
 
+.. automethod:: bse.BSE.lookup
+
 .. automethod:: bse.BSE.getScripName
 
 .. automethod:: bse.BSE.getScripCode

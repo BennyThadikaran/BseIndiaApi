@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constants" href="Constants.html" /><link rel="prev" title="Welcome to BSE’s documentation!" href="index.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2023.09.10 -->
-        <title>Usage - bse 3.0.2 documentation</title>
+        <title>Usage - bse 3.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">bse 3.0.2 documentation</div></a>
+      <a href="index.html"><div class="brand">bse 3.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">bse 3.0.2 documentation</span>
+  <span class="sidebar-brand-text">bse 3.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -240,6 +240,27 @@
 <dt class="sig sig-object py" id="bse.BSE.exit">
 <span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.BSE.exit" title="Link to this definition">¶</a></dt>
 <dd><p>Close the Request session</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.lookup">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#bse.BSE.lookup" title="Link to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.1.0.</span></p>
+</div>
+<p>Search by Company name, stock symbol, ISIN or BSE code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – A string representing the Company name, Stock symbol, ISIN code or BSE code.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None if lookup failed else a dictionary containing company_name,
+symbol, isin and bse_code. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/lookup.json">Sample response</a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[dict]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -838,6 +859,7 @@ and each value is a list of dictionaries containing index data.</p>
 </li>
 <li><a class="reference internal" href="#general-methods">General Methods</a><ul>
 <li><a class="reference internal" href="#bse.BSE.exit"><code class="docutils literal notranslate"><span class="pre">BSE.exit()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.lookup"><code class="docutils literal notranslate"><span class="pre">BSE.lookup()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.getScripName"><code class="docutils literal notranslate"><span class="pre">BSE.getScripName()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.getScripCode"><code class="docutils literal notranslate"><span class="pre">BSE.getScripCode()</span></code></a></li>
 </ul>
@@ -877,7 +899,7 @@ and each value is a list of dictionaries containing index data.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=3f474186"></script>
+</div><script src="_static/documentation_options.js?v=dd1205ac"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
