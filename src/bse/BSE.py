@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
-
+import json
 from html.parser import HTMLParser
 from pathlib import Path
 from re import search
@@ -880,6 +880,192 @@ class BSE:
             return match.group(1)
 
         raise ValueError(f"Could not find scrip code for {scripname}")
+
+    def getScripGroups(self) -> List[str]:
+        """
+        Get list of all scrip groups
+
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: List of scrip groups
+        :rtype: list[str]
+        """
+        url = f"{self.api_url}/BindDDLEQ/w"
+        params = {"flag": "Group"}
+
+        th.check()
+
+        response = self.__req(url, params).json()
+
+        return [item["Symbol"] for item in response]
+
+    def getScripTradingStats(
+        self, scripcode: str, flag: str = "", quotetype: str = "EQ"
+    ) -> dict:
+        """
+        Stock trading data
+
+        :param scripcode: BSE scrip code
+        :type scripcode: str
+        :param flag: Optional flag
+        :type flag: str
+        :param quotetype: Default 'EQ'
+        :type quotetype: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: Scrip trading data. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/getScripTradingStats.json>`__
+        :rtype: dict
+        """
+
+        url = f"{self.api_url}/StockTrading/w"
+
+        params = {
+            "flag": flag,
+            "quotetype": quotetype,
+            "scripcode": scripcode,
+        }
+
+        th.check()
+
+        return self.__req(url, params).json()
+
+    def equityMetaInfo(self, scripcode: str) -> dict:
+        """
+        Get meta information for given scripcode
+
+        :param scripcode: BSE scrip code
+        :type scripcode: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: Meta information for given scripcode. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/equityMetaInfo.json>`__
+        :rtype: dict
+        """
+
+        url = f"{self.api_url}/ComHeadernew/w"
+
+        params = {
+            "quotetype": "EQ",
+            "scripcode": scripcode,
+            "seriesid": "",
+        }
+
+        th.check()
+
+        return self.__req(url, params).json()
+
+    def equityPriceVolumeT12M(self, scripcode: str) -> dict:
+        """
+        Historical 12 months price and volume data for single equities
+
+        :param scripcode: BSE scrip code
+        :type scripcode: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: Historical 12 months data parsed into cleaner JSON format. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/equityPriceVolumeT12M.json>`__
+        :rtype: dict
+        """
+
+        url = f"{self.api_url}/StockReachGraph/w"
+
+        params = {
+            "scripcode": scripcode,
+            "flag": "12M",
+            "fromdate": "",
+            "todate": "",
+            "seriesid": "",
+        }
+
+        th.check()
+
+        res = self.__req(url, params).json()
+
+        if isinstance(res, str):
+            try:
+                res = json.loads(res)
+            except json.JSONDecodeError:
+                raise ValueError(f"Failed to parse BSE's response as JSON. Raw response: {res}")
+
+        if "Data" in res and isinstance(res["Data"], str):
+            try:
+                parsed_data = json.loads(res["Data"])
+                if parsed_data:
+                    # 'Data' typically has 'dttm', 'vale1', 'vole'
+                    # But we'll dynamically get fields from the first row
+                    fields = list(parsed_data[0].keys())
+                    data_matrix = []
+                    for row in parsed_data:
+                        data_matrix.append([row.get(f, "") for f in fields])
+                    res["Data"] = {"fields": fields, "data": data_matrix}
+                else:
+                    res["Data"] = {"fields": [], "data": []}
+            except json.JSONDecodeError:
+                raise ValueError(f"Failed to parse inner 'Data' string as JSON. Raw string: {res['Data']}")
+
+        return res
+
+    def resultsSnapshot(self, scripcode: str) -> dict:
+        """
+        Stock results snapshot
+
+        :param scripcode: BSE scrip code
+        :type scripcode: str
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: Stock results parsed into cleaner JSON format. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/resultsSnapshot.json>`__
+        :rtype: dict
+        """
+
+        url = f"{self.api_url}/TabResults_PAR/w"
+
+        params = {
+            "scripcode": scripcode,
+            "tabtype": "RESULTS",
+        }
+
+        th.check()
+
+        res = self.__req(url, params).json()
+
+        if isinstance(res, str):
+            try:
+                res = json.loads(res)
+            except json.JSONDecodeError:
+                raise ValueError(f"Failed to parse BSE's response as JSON. Raw response: {res}")
+
+        currency_unit = res.get("col1", "").strip("() ")
+        periods = []
+        for i in range(2, 5):
+            col_val = res.get(f"col{i}", "")
+            if col_val:
+                periods.append(col_val)
+
+        def format_results(results_list):
+            if not results_list:
+                return {"fields": [], "data": []}
+
+            fields = ["title"]
+            for i in range(3):
+                if i < len(periods):
+                    fields.append(periods[i])
+                else:
+                    fields.append(f"Period{i + 1}")
+
+            data = []
+            for item in results_list:
+                row = [item.get("title", "")]
+                for i in range(1, 4):
+                    row.append(item.get(f"v{i}", ""))
+                data.append(row)
+
+            return {"fields": fields, "data": data}
+
+        return {
+            "currency_unit": currency_unit,
+            "periods": periods,
+            "results_in_crores": format_results(res.get("resultinCr", [])),
+            "results_in_millions": format_results(res.get("resultinM", [])),
+            "period_links": res.get("resultinS", []),
+        }
 
     def fetchAllIndicesDataByDate(self, dt: date) -> Dict[str, List[Dict]]:
         """

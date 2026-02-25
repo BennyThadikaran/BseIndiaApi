@@ -1,0 +1,116 @@
+{
+    "currency_unit": "in Cr.",
+    "periods": [
+        "Dec-25",
+        "Sep-25",
+        "FY24-25"
+    ],
+    "results_in_crores": {
+        "fields": [
+            "title",
+            "Dec-25",
+            "Sep-25",
+            "FY24-25"
+        ],
+        "data": [
+            [
+                "Revenue",
+                "2,883.00",
+                "2,650.00",
+                "8,617.00"
+            ],
+            [
+                "Net Profit",
+                "657.00",
+                "691.00",
+                "1,960.00"
+            ],
+            [
+                "EPS",
+                "0.72",
+                "0.76",
+                "2.22"
+            ],
+            [
+                "Cash EPS",
+                "0.78",
+                "0.81",
+                "2.27"
+            ],
+            [
+                "OPM %",
+                "27.89",
+                "31.17",
+                "26.73"
+            ],
+            [
+                "NPM %",
+                "22.79",
+                "26.08",
+                "22.75"
+            ]
+        ]
+    },
+    "results_in_millions": {
+        "fields": [
+            "title",
+            "Dec-25",
+            "Sep-25",
+            "FY24-25"
+        ],
+        "data": [
+            [
+                "Revenue",
+                "28,830.00",
+                "26,500.00",
+                "86,170.00"
+            ],
+            [
+                "Net Profit",
+                "6,570.00",
+                "6,910.00",
+                "19,600.00"
+            ],
+            [
+                "EPS",
+                "0.72",
+                "0.76",
+                "2.22"
+            ],
+            [
+                "Cash EPS",
+                "0.78",
+                "0.81",
+                "2.27"
+            ],
+            [
+                "OPM %",
+                "27.89",
+                "31.17",
+                "26.73"
+            ],
+            [
+                "NPM %",
+                "22.79",
+                "26.08",
+                "22.75"
+            ],
+            [
+                "P/E",
+                "97.09",
+                "103.05",
+                "--"
+            ]
+        ]
+    },
+    "period_links": [
+        {
+            "FY": "FY24-25",
+            "LQ": "Dec-25",
+            "SQ": "Sep-25",
+            "LFY": "https://www.bseindia.com/corporates/results.aspx?Code=543320&Company=Eternal-Ltd&qtr=125.50&RType=",
+            "LLQ": "https://www.bseindia.com/corporates/results.aspx?Code=543320&Company=Eternal-Ltd&qtr=128.00&RType=",
+            "LSQ": "https://www.bseindia.com/corporates/results.aspx?Code=543320&Company=Eternal-Ltd&qtr=127.00&RType="
+        }
+    ]
+}
