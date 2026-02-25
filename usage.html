@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constants" href="Constants.html" /><link rel="prev" title="Welcome to BSE’s documentation!" href="index.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2023.09.10 -->
-        <title>Usage - bse 3.1.0 documentation</title>
+        <title>Usage - bse 3.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">bse 3.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">bse 3.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">bse 3.1.0 documentation</span>
+  <span class="sidebar-brand-text">bse 3.2.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -313,6 +313,105 @@ symbol, isin and bse_code. <a class="reference external" href="https://github.co
 </dl>
 <p>Example
 HDFCBANK -&gt; ‘500180’</p>
+</dd></dl>
+
+</section>
+<section id="stock-stats-data">
+<h2>Stock Stats &amp; Data<a class="headerlink" href="#stock-stats-data" title="Link to this heading">¶</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.equityMetaInfo">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">equityMetaInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scripcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#bse.BSE.equityMetaInfo" title="Link to this definition">¶</a></dt>
+<dd><p>Get meta information for given scripcode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Meta information for given scripcode. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/equityMetaInfo.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.getScripTradingStats">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">getScripTradingStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scripcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quotetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EQ'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#bse.BSE.getScripTradingStats" title="Link to this definition">¶</a></dt>
+<dd><p>Stock trading data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p></li>
+<li><p><strong>flag</strong> (<em>str</em>) – Optional flag</p></li>
+<li><p><strong>quotetype</strong> (<em>str</em>) – Default ‘EQ’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Scrip trading data. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/getScripTradingStats.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.resultsSnapshot">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">resultsSnapshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scripcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#bse.BSE.resultsSnapshot" title="Link to this definition">¶</a></dt>
+<dd><p>Stock results snapshot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Stock results parsed into cleaner JSON format. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/resultsSnapshot.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.equityPriceVolumeT12M">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">equityPriceVolumeT12M</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scripcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#bse.BSE.equityPriceVolumeT12M" title="Link to this definition">¶</a></dt>
+<dd><p>Historical 12 months price and volume data for single equities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scripcode</strong> (<em>str</em>) – BSE scrip code</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Historical 12 months data parsed into cleaner JSON format. <a class="reference external" href="https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/equityPriceVolumeT12M.json">Sample response</a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -868,6 +967,13 @@ and each value is a list of dictionaries containing index data.</p>
 <li><a class="reference internal" href="#bse.BSE.getScripCode"><code class="docutils literal notranslate"><span class="pre">BSE.getScripCode()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#stock-stats-data">Stock Stats &amp; Data</a><ul>
+<li><a class="reference internal" href="#bse.BSE.equityMetaInfo"><code class="docutils literal notranslate"><span class="pre">BSE.equityMetaInfo()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.getScripTradingStats"><code class="docutils literal notranslate"><span class="pre">BSE.getScripTradingStats()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.resultsSnapshot"><code class="docutils literal notranslate"><span class="pre">BSE.resultsSnapshot()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.equityPriceVolumeT12M"><code class="docutils literal notranslate"><span class="pre">BSE.equityPriceVolumeT12M()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#download-reports">Download Reports</a><ul>
 <li><a class="reference internal" href="#bse.BSE.bhavcopyReport"><code class="docutils literal notranslate"><span class="pre">BSE.bhavcopyReport()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.deliveryReport"><code class="docutils literal notranslate"><span class="pre">BSE.deliveryReport()</span></code></a></li>
@@ -903,7 +1009,7 @@ and each value is a list of dictionaries containing index data.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=dd1205ac"></script>
+</div><script src="_static/documentation_options.js?v=4f6ddb47"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>

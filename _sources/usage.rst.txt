@@ -44,6 +44,17 @@ General Methods
 
 .. automethod:: bse.BSE.getScripCode
 
+Stock Stats & Data
+------------------
+
+.. automethod:: bse.BSE.equityMetaInfo
+
+.. automethod:: bse.BSE.getScripTradingStats
+
+.. automethod:: bse.BSE.resultsSnapshot
+
+.. automethod:: bse.BSE.equityPriceVolumeT12M
+
 Download Reports
 ----------------
 .. automethod:: bse.BSE.bhavcopyReport
