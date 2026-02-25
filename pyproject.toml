@@ -1,11 +1,10 @@
 [build-system]
 build-backend = "hatchling.build"
-
 requires = [ "hatchling" ]
 
 [project]
 name = "bse"
-version = "3.1.0"
+version = "3.2.0"
 description = "Unofficial Python Api for BSE India stock exchange"
 readme = "README.md"
 keywords = [ "bse", "bse-stock-data", "stock-market-api", "stock-news-api" ]
@@ -26,12 +25,12 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Office/Business :: Financial :: Investment",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [ "mthrottle>=0.0.1", "requests>=2.31" ]
-
 optional-dependencies.dev = [
   "furo==2023.9.10",
   "sphinx==7.4.7",
@@ -39,8 +38,6 @@ optional-dependencies.dev = [
 urls."Bug Tracker" = "https://github.com/BennyThadikaran/BseIndiaApi/issues"
 urls."Homepage" = "https://github.com/BennyThadikaran/BseIndiaApi"
 
-[tool.hatch.build.targets.sdist]
-exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
-
-[tool.hatch.build.targets.wheel]
-exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
+[tool.hatch]
+build.targets.sdist.exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
+build.targets.wheel.exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
