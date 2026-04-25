@@ -24,8 +24,39 @@ class C:
     RED = "\033[31m"
     GREY = "\033[90m"
 
-def adRatio(adv, dec):
-    return 0 if adv == 0 else (adv if dec == 0 else round(adv / dec, 2))
+    ENDC = "\033[0m"
+
+    @staticmethod
+    def wrap(text, color, bold=False):
+        style = ""
+        if bold:
+            style += C.BOLD
+        return f"{style}{color}{text}{C.ENDC}"
+
+
+def adPercentFormatted(adv, dec, unc=0):
+    adv, dec, unc = int(adv), int(dec), int(unc)
+    total = adv + dec + unc
+    pct = 0 if total == 0 else round((adv / total) * 100, 1)
+
+    sPct = f"{pct:>5.1f}%"
+
+    if pct >= 75:
+        s = C.wrap("++ ▲", C.GREEN, bold=True)
+    elif pct >= 60:
+        s = C.wrap("+  ▲", C.GREEN)
+    elif pct >= 52:
+        s = C.wrap("-  ▲", C.DARK_GREEN)
+    elif pct >= 48:
+        s = C.wrap("◀ ▶", C.GREY)
+    elif pct >= 35:
+        s = C.wrap("-  ▼", C.YELLOW)
+    elif pct >= 25:
+        s = C.wrap("+  ▼", C.FAIL)
+    else:
+        s = C.wrap("++ ▼", C.RED, bold=True)
+
+    return f"{s:<12} {sPct}"
 
 
 broad = {
