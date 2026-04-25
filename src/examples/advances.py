@@ -21,6 +21,12 @@ def adRatio(adv, dec):
     return 0 if adv == 0 else (adv if dec == 0 else round(adv / dec, 2))
 
 
+broad = {
+    "sensex": "Sensex",
+    "100": "BSE 100",
+    "150 midcap index": "BSE MidCap 150",
+    "250 smallcap index": "BSE SmallCap 250",
+}
 def adRatioFormatted(adv, dec):
     ratio = adRatio(int(adv), int(dec))
     sRatio = str(ratio).ljust(5)
@@ -41,35 +47,37 @@ def adRatioFormatted(adv, dec):
     return f'{s.ljust(10)}{C.ENDC} {sRatio}'.ljust(11)
 
 
-broad = {'100': '100', 'midcap': 'Midcap', 'smallcap': 'Smallcap'}
-
-sector = {
-    'auto': 'Auto',
-    'bankex': 'Banking',
-    'basic materials': 'Materials',
-    'capital goods': 'Capital Goods',
-    'consumer discretionary goods & services': 'Con Discretionary',
-    'consumer durables': 'Con Durables',
-    'energy': 'Energy',
-    'fast moving consumer goods': 'FMCG',
-    'finance': 'Finance',
-    'healthcare': 'Healthcare',
-    'industrials': 'Industrials',
-    'information technology': 'Info Tech',
-    'metal': 'Metal',
-    'oil & gas': 'Oil & Gas',
-    'realty': 'Realty',
-    'telecom': 'Telecom',
-    'utilities': 'Utilities'
+sectors = {
+    "bankex": "Banking",
+    "capital goods": "Capital Goods",
+    "capital markets & insurance": "Capital Markets & Insurance",
+    "commodities": "Commodities",
+    "consumer discretionary": "Consumer Discretionary",
+    "consumer durables": "Consumer Durables",
+    "cpse": "CPSE",
+    "energy": "Energy",
+    "fast moving consumer goods": "FMCG",
+    "financial services": "Financial Services",
+    "focused it": "Focused IT",
+    "healthcare": "Healthcare",
+    "hospitals": "Hospitals",
+    "india defence": "Defence",
+    "india infrastructure index": "Infrastructure",
+    "india manufacturing index": "Manufacturing",
+    "india sector leaders": "Sector Leaders",
+    "industrials": "Industrials",
+    "information technology": "IT",
+    "internet economy": "Internet",
+    "metal": "Metals",
 }
 
-with BSE('./') as bse:
+with BSE("./") as bse:
     data = bse.advanceDecline()
 
 broad_out, sector_out = '', ''
 
 for idx in data:
-    name = idx['Sens_ind'][8:].lower()
+    name = idx["Sens_ind"].replace("BSE", "").strip().lower()
 
     if name in broad:
 
