@@ -9,13 +9,20 @@ if 'win' in platform:
 
 
 class C:
-    '''Color values for terminal'''
+    """ANSI color + style helpers for terminal output"""
 
-    GREEN = '\033[92m'
-    CYAN = '\033[96m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
+    # Styles
+    BOLD = "\033[1m"
+    DIM = "\033[2m"
 
+    # Colors
+    GREEN = "\033[92m"
+    DARK_GREEN = "\033[32m"
+    CYAN = "\033[96m"
+    YELLOW = "\033[93m"
+    FAIL = "\033[91m"
+    RED = "\033[31m"
+    GREY = "\033[90m"
 
 def adRatio(adv, dec):
     return 0 if adv == 0 else (adv if dec == 0 else round(adv / dec, 2))
