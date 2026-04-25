@@ -3,9 +3,9 @@ from os import system
 from sys import platform
 
 # Check if system is windows or linux
-if 'win' in platform:
+if "win" in platform:
     # enable color support in Windows
-    system('color')
+    system("color")
 
 
 class C:
@@ -65,25 +65,6 @@ broad = {
     "150 midcap index": "BSE MidCap 150",
     "250 smallcap index": "BSE SmallCap 250",
 }
-def adRatioFormatted(adv, dec):
-    ratio = adRatio(int(adv), int(dec))
-    sRatio = str(ratio).ljust(5)
-
-    if ratio >= 1.5:
-        s = f'{C.GREEN}++ ▲'
-    elif 1 <= ratio < 1.5:
-        s = f'{C.GREEN}+  ▲'
-    elif 0.8 <= ratio < 1:
-        s = f'{C.GREEN}-  ▲'
-    elif 0.5 <= ratio < 0.8:
-        s = f'{C.CYAN}◀ ▶'
-    elif 0.3 <= ratio < 0.5:
-        s = f'{C.FAIL}+  ▼'
-    else:
-        s = f'{C.FAIL}++ ▼'
-
-    return f'{s.ljust(10)}{C.ENDC} {sRatio}'.ljust(11)
-
 
 sectors = {
     "bankex": "Banking",
@@ -112,36 +93,29 @@ sectors = {
 with BSE("./") as bse:
     data = bse.advanceDecline()
 
-broad_out, sector_out = '', ''
+broad_out = sector_out = ""
 
 for idx in data:
     name = idx["Sens_ind"].replace("BSE", "").strip().lower()
 
+    up = idx["UP"]
+    down = idx["DN"]
+    unchanged = idx["UC"]
+    ratio = adPercentFormatted(up, down)
+
     if name in broad:
+        idx_name = f"{broad[name]:<20}"
+        broad_out += f"{idx_name}: {ratio} ▲ {up:<8} ▼ {down:<8} {unchanged:<2}\n"
 
-        idx_name = f'BSE {broad[name].ljust(10)}'
+    elif name in sectors:
+        idx_name = f"{sectors[name]:<28}"
+        sector_out += f"{idx_name}: {ratio} ▲ {up:<4} ▼ {down:<4} {unchanged:<2}\n"
 
-        ratio = adRatioFormatted(idx['UP'], idx['DN'])
-        up = idx['UP'].ljust(8)
-        down = idx['DN'].ljust(8)
-        unchanged = idx['UC'].ljust(2)
+HR = "-" * 58
 
-        broad_out += f"{idx_name}: {ratio} ▲ {up} ▼ {down} {unchanged}\n"
+print(f"{C.CYAN}++ : Very Strong   + : Strong     -   : Weak")
 
-    if name in sector:
-        ratio = adRatioFormatted(idx['UP'], idx['DN'])
-        idx_name = sector[name].ljust(24)
-        up = idx['UP'].ljust(4)
-        down = idx['DN'].ljust(4)
-        unchanged = idx['UC'].ljust(2)
-
-        sector_out += f"{idx_name}: {ratio}   ▲ {up}   ▼ {down}  {unchanged}\n"
-
-HR = '-' * 58
-
-print(f'{C.CYAN}++ : Very Strong   + : Strong     -   : Weak')
-
-print(f'▲  : Uptrend       ▼ : Downtrend  ◀ ▶ : Neutral{C.ENDC}\n')
+print(f"▲  : Uptrend       ▼ : Downtrend  ◀ ▶ : Neutral{C.ENDC}\n")
 
 print(f"{C.CYAN}Broad Market\n{HR}{C.ENDC}\n{broad_out}")
 
