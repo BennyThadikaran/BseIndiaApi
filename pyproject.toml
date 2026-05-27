@@ -4,7 +4,7 @@ requires = [ "hatchling" ]
 
 [project]
 name = "bse"
-version = "3.2.0"
+version = "3.3.0"
 description = "Unofficial Python Api for BSE India stock exchange"
 readme = "README.md"
 keywords = [ "bse", "bse-stock-data", "stock-market-api", "stock-news-api" ]
@@ -36,7 +36,7 @@ optional-dependencies.dev = [
   "sphinx==7.4.7",
 ]
 urls."Bug Tracker" = "https://github.com/BennyThadikaran/BseIndiaApi/issues"
-urls."Homepage" = "https://github.com/BennyThadikaran/BseIndiaApi"
+urls.Homepage = "https://github.com/BennyThadikaran/BseIndiaApi"
 
 [tool.hatch]
 build.targets.sdist.exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
