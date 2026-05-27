@@ -72,6 +72,8 @@ Corporate Filings
 
 .. automethod:: bse.BSE.resultCalendar
 
+.. automethod:: bse.BSE.circulars
+
 Market Updates and Summary
 --------------------------
 

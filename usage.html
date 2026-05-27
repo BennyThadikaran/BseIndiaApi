@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constants" href="Constants.html" /><link rel="prev" title="Welcome to BSE’s documentation!" href="index.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2023.09.10 -->
-        <title>Usage - bse 3.2.0 documentation</title>
+        <title>Usage - bse 3.3.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">bse 3.2.0 documentation</div></a>
+      <a href="index.html"><div class="brand">bse 3.3.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">bse 3.2.0 documentation</span>
+  <span class="sidebar-brand-text">bse 3.3.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -639,6 +639,43 @@ If not provided, the current date and time is considered.</p>
 <p>Provide <code class="docutils literal notranslate"><span class="pre">scripcode</span></code> to filter by stock.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="bse.BSE.circulars">
+<span class="sig-prename descclassname"><span class="pre">BSE.</span></span><span class="sig-name descname"><span class="pre">circulars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scripcode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">department</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Equity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#bse.BSE.circulars" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch BSE circulars / corporate announcements.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.3.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_date</strong> (<em>datetime.datetime</em>) – (Optional). From date.</p></li>
+<li><p><strong>to_date</strong> (<em>datetime.datetime</em>) – (Optional). To date.</p></li>
+<li><p><strong>scripcode</strong> (<em>str</em>) – (Optional). Filter by BSE scrip code
+(example: <code class="docutils literal notranslate"><span class="pre">500180</span></code>). Use <a class="reference internal" href="#bse.BSE.getScripCode" title="bse.BSE.getScripCode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getScripCode()</span></code></a>
+to lookup the BSE scrip code for a stock symbol.</p></li>
+<li><p><strong>department</strong> (<em>str</em>) – (Optional). Department filter.</p></li>
+<li><p><strong>segment</strong> (<em>str</em>) – (Optional). Market segment. Defaults to “Equity”.</p></li>
+<li><p><strong>subject</strong> (<em>str</em>) – (Optional). Subject filter.</p></li>
+<li><p><strong>category</strong> (<em>str</em>) – (Optional). Category filter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">from_date</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">to_date</span></code></p></li>
+<li><p><strong>TimeoutError</strong> – if request timed out with no response</p></li>
+<li><p><strong>ConnectionError</strong> – in case of HTTP error or server returns error response.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict with <code class="docutils literal notranslate"><span class="pre">Table</span></code> key containing list of BSE circulars / announcements.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="market-updates-and-summary">
 <h2>Market Updates and Summary<a class="headerlink" href="#market-updates-and-summary" title="Link to this heading">¶</a></h2>
@@ -984,6 +1021,7 @@ and each value is a list of dictionaries containing index data.</p>
 <li><a class="reference internal" href="#bse.BSE.announcements"><code class="docutils literal notranslate"><span class="pre">BSE.announcements()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.actions"><code class="docutils literal notranslate"><span class="pre">BSE.actions()</span></code></a></li>
 <li><a class="reference internal" href="#bse.BSE.resultCalendar"><code class="docutils literal notranslate"><span class="pre">BSE.resultCalendar()</span></code></a></li>
+<li><a class="reference internal" href="#bse.BSE.circulars"><code class="docutils literal notranslate"><span class="pre">BSE.circulars()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#market-updates-and-summary">Market Updates and Summary</a><ul>
@@ -1009,7 +1047,7 @@ and each value is a list of dictionaries containing index data.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=4f6ddb47"></script>
+</div><script src="_static/documentation_options.js?v=3eb8911e"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
