@@ -456,6 +456,77 @@ class BSE:
 
         return self.__req(url, params=params).json()
 
+    def circulars(
+        self,
+        from_date: datetime | None = None,
+        to_date: datetime | None = None,
+        scripcode: str | None = None,
+        department: str | None = None,
+        segment: str = "Equity",
+        subject: str | None = None,
+        category: str | None = None,
+    ) -> Dict:
+        """
+        Fetch BSE circulars / corporate announcements.
+
+        .. versionadded:: 3.3.0
+
+        :param from_date: (Optional). From date.
+        :type from_date: datetime.datetime
+        :param to_date: (Optional). To date.
+        :type to_date: datetime.datetime
+        :param scripcode: (Optional). Filter by BSE scrip code
+            (example: ``500180``). Use :meth:`getScripCode`
+            to lookup the BSE scrip code for a stock symbol.
+        :type scripcode: str
+        :param department: (Optional). Department filter.
+        :type department: str
+        :param segment: (Optional). Market segment. Defaults to "Equity".
+        :type segment: str
+        :param subject: (Optional). Subject filter.
+        :type subject: str
+        :param category: (Optional). Category filter.
+        :type category: str
+        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise TimeoutError: if request timed out with no response
+        :raise ConnectionError: in case of HTTP error or server returns error response.
+        :return: Dict with ``Table`` key containing list of BSE circulars / announcements.
+        :rtype: list[dict]
+        """
+
+        self
+        if not from_date and not to_date:
+            from_date = to_date = datetime.now()
+
+        params = dict(
+            strTxtNoticeNo="",
+            strTxtDate="",
+            strTxtTodate="",
+            strScripcode=scripcode or "",
+            strDep=department or "",
+            strSegment=segment,
+            subject=subject or "",
+            category=category or "",
+            containgtext="",
+        )
+
+        if from_date and to_date:
+            if from_date > to_date:
+                raise ValueError("'from_date' cannot be greater than 'to_date'")
+
+            fmt = "%Y-%m-%d"
+
+            params.update(
+                {
+                    "strTxtDate": from_date.strftime(fmt),
+                    "strTxtTodate": to_date.strftime(fmt),
+                }
+            )
+
+        url = f"{self.api_url}/getDataAdvance_New/w"
+
+        return self.__req(url, params=params).json()
+
     def advanceDecline(self) -> List[dict]:
         """
         Advance decline values for all BSE indices
