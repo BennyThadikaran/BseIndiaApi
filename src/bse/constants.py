@@ -7,7 +7,7 @@ class CATEGORY:
     AGM = 'AGM/EGM'
     BOARD_MEETING = 'Board Meeting'
     UPDATE = 'Company Update'
-    ACTION = 'Corp`.` Action'
+    ACTION = 'Corp. Action'
     INSIDER = 'Insider Trading / SAST'
     NEW_LISTING = 'New Listing'
     RESULT = 'Result'

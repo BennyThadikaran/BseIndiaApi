@@ -122,9 +122,20 @@ class BSE:
                 if r.status_code == 404:
                     raise RuntimeError("Report is unavailable or not yet updated.")
 
-                with fname.open(mode="wb") as f:
-                    for chunk in r.iter_content(chunk_size=1000000):
-                        f.write(chunk)
+                if not r.ok:
+                    raise RuntimeError(
+                        f"Download failed with status {r.status_code}: {r.reason}"
+                    )
+
+                try:
+                    with fname.open(mode="wb") as f:
+                        for chunk in r.iter_content(chunk_size=1000000):
+                            f.write(chunk)
+                except BaseException:
+                    # Do not leave a truncated file behind; a later
+                    # exists() check would treat it as a valid report.
+                    fname.unlink(missing_ok=True)
+                    raise
         except ReadTimeout:
             raise TimeoutError("Request timed out")
 
@@ -189,7 +200,6 @@ class BSE:
         file = self.__download(url, folder)
 
         if not file.exists():
-            file.unlink()
             raise FileNotFoundError(f"Failed to download file: {file.name}")
 
         return file
@@ -219,7 +229,6 @@ class BSE:
         file = self.__download(url, folder)
 
         if not file.exists():
-            file.unlink()
             raise FileNotFoundError(f"Failed to download file: {file.name}")
 
         file = BSE.__unzip(file, file.parent)
@@ -349,7 +358,8 @@ class BSE:
         :type sector: str
         :param purpose_code: Limit result to actions with given purpose
         :type purpose_code: str
-        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise ValueError: if ``from_date`` is greater than ``to_date``,
+            or if ``max_chunk_size`` is not a positive integer
         :raise TimeoutError: if request timed out with no response
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of actions. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/actions.json>`__
@@ -421,7 +431,8 @@ class BSE:
         :type to_date: datetime.datetime
         :param scripcode: (Optional). Limit result to stock symbol
         :type scripcode: str
-        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise ValueError: if ``from_date`` is greater than ``to_date``,
+            or if ``max_chunk_size`` is not a positive integer
         :raise TimeoutError: if request timed out with no response
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: List of Corporate results. `Sample response <https://github.com/BennyThadikaran/BseIndiaApi/blob/main/src/samples/resultCalendar.json>`__
@@ -487,7 +498,8 @@ class BSE:
         :type subject: str
         :param category: (Optional). Category filter.
         :type category: str
-        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise ValueError: if ``from_date`` is greater than ``to_date``,
+            or if ``max_chunk_size`` is not a positive integer
         :raise TimeoutError: if request timed out with no response
         :raise ConnectionError: in case of HTTP error or server returns error response.
         :return: Dict with ``Table`` key containing list of BSE circulars / announcements.
@@ -1277,10 +1289,21 @@ class BSE:
         :type to_date: datetime.date
         :param max_chunk_size: The max size of each chunk into which the range is split
         :type max_chunk_size: int
-        :raise ValueError: if ``from_date`` is greater than ``to_date``
+        :raise ValueError: if ``from_date`` is greater than ``to_date``,
+            or if ``max_chunk_size`` is not a positive integer
         :return: A sorted list of tuples. Each element of the list is a range (`start_date`, `end_date`)
         :rtype: List[Tuple[datetime.date, datetime.date]]
         """
+
+        if max_chunk_size <= 0:
+            raise ValueError(
+                f"max_chunk_size must be a positive integer, got {max_chunk_size}"
+            )
+
+        if from_date > to_date:
+            raise ValueError(
+                f"from_date ({from_date}) must not be later than to_date ({to_date})"
+            )
 
         chunks = []
         current_start = from_date
