@@ -1314,8 +1314,7 @@ class BSE:
             current_end = current_start + timedelta(days=max_chunk_size - 1)
 
             # Don't go past the final date.
-            if current_end > to_date:
-                current_end = to_date
+            current_end = min(current_end, to_date)
 
             chunks.append((current_start, current_end))
 
