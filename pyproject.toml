@@ -39,5 +39,5 @@ urls."Bug Tracker" = "https://github.com/BennyThadikaran/BseIndiaApi/issues"
 urls.Homepage = "https://github.com/BennyThadikaran/BseIndiaApi"
 
 [tool.hatch]
-build.targets.sdist.exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
-build.targets.wheel.exclude = [ "docs", "tests", ".github", "src/samples", "src/examples" ]
+build.targets.wheel.exclude = [ ".github", "docs", "src/examples", "src/samples", "tests" ]
+build.targets.sdist.exclude = [ ".github", "docs", "src/examples", "src/samples", "tests" ]
