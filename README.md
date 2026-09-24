@@ -4,6 +4,8 @@ An Unofficial Python Api for BSE India stock exchange.
 
 Python version: >= 3.8
 
+> **⚠️ Advisory:** BSE has recently changed its API endpoints, which may cause `403 Forbidden` errors when using the current version of `BSE`. An update is in progress. See [Issue #17](https://github.com/BennyThadikaran/BseIndiaApi/issues/17) for updates.
+
 ## Install with PIP
 
 ```
