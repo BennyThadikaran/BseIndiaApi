@@ -66,7 +66,9 @@ class BSE:
 
     def __init__(self, download_folder: str | Path):
         self.session = Session()
-        ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.3"
+
+        # Source: https://github.com/microlinkhq/top-user-agents
+        ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
 
         self.session.headers.update(
             {
