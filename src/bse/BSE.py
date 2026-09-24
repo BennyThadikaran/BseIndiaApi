@@ -78,6 +78,7 @@ class BSE:
                 "Origin": self.base_url,
                 "Referer": self.base_url,
                 "Connection": "keep-alive",
+                "Sec-Fetch-Site": "same-site",
             }
         )
 
