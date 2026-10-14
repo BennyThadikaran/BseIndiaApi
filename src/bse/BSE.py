@@ -327,7 +327,7 @@ class BSE:
             "strPrevDate": from_date.strftime(fmt),
             "strToDate": to_date.strftime(fmt),
             "strSearch": "P",
-            "strscrip": scripcode,
+            "strScrip": scripcode,
             "strType": _type,
         }
 
